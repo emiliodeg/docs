@@ -1,18 +1,19 @@
 <div class='article-menu'>
   <ul>
     <li>
-      <a href="#overview">Encryption/Decryption</a> <ul>
+      <a href="#overview">Debugging Applications</a> 
+      <ul>
         <li>
-          <a href="#usage">Basic Usage</a>
+          <a href="#catching-exceptions">Catching Exceptions</a>
         </li>
         <li>
-          <a href="#options">Encryption Options</a>
+          <a href="#debug-component">Debug component</a>
         </li>
         <li>
-          <a href="#base64">Base64 Support</a>
+          <a href="#reflection-introspection">Reflection and Introspection</a>
         </li>
         <li>
-          <a href="#service">Setting up an Encryption service</a>
+          <a href="#using-xdebug">Using Xdebug</a>
         </li>
       </ul>
     </li>
