@@ -78,7 +78,7 @@
           <a href="#service-name-conventions">Service Name Conventions</a>
         </li>
         <li>
-          <a href="#service-provider">Service Providers</a>
+          <a href="#service-providers">Service Providers</a>
         </li>
         <li>
           <a href="#implementing-your-own-di">Implementing your own DI</a>
