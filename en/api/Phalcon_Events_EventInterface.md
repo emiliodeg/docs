@@ -1,6 +1,12 @@
-# Interface **Phalcon\\Events\\EventInterface**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Events\EventInterface'
+---
+# Interface **Phalcon\Events\EventInterface**
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/events/eventinterface.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/events/eventinterface.zep)
 
 ## Methods
 abstract public  **getData** ()

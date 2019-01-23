@@ -1,14 +1,14 @@
-<div class='article-menu' markdown='1'>
-
-- [Cookies Management](#overview)
-    - [Basic Usage](#usage)
-    - [Encryption/Decryption of Cookies](#encryption-decryption)
-
-</div>
+---
+layout: article
+language: 'en'
+version: '4.0'
+---
+##### This article reflects v3.4 and has not yet been revised
+{:.alert .alert-danger}
 
 <a name='overview'></a>
 # Cookies Management
-[Cookies](http://en.wikipedia.org/wiki/HTTP_cookie) are a very useful way to store small pieces of data on the client's machine that can be retrieved even if the user closes his/her browser. `Phalcon\Http\Response\Cookies` acts as a global bag for cookies. Cookies are stored in this bag during the request execution and are sent automatically at the end of the request.
+[Cookies](https://en.wikipedia.org/wiki/HTTP_cookie) are a very useful way to store small pieces of data on the client's machine that can be retrieved even if the user closes his/her browser. `Phalcon\Http\Response\Cookies` acts as a global bag for cookies. Cookies are stored in this bag during the request execution and are sent automatically at the end of the request.
 
 <a name='usage'></a>
 ## Basic Usage
@@ -41,6 +41,7 @@ class SessionController extends Controller
             'some value',
             time() + 15 * 86400
         );
+        $this->cookies->send();
     }
 
     public function logoutAction()
@@ -76,7 +77,7 @@ $di->set(
 );
 ```
 
-If you wish to use encryption, a global key must be set in the [crypt](/[[language]]/[[version]]/crypt) service:
+If you wish to use encryption, a global key must be set in the [crypt](/4.0/en/crypt) service:
 
 ```php
     <?php
@@ -88,11 +89,44 @@ If you wish to use encryption, a global key must be set in the [crypt](/[[langua
         function () {
             $crypt = new Crypt();
 
-            $crypt->setKey('#1dj8$=dp?.ak//j1V$'); // Use your own key!
+            /**
+             * Set the cipher algorithm.
+             *
+             * The `aes-256-gcm' is the preferable cipher, but it is not usable until the
+             * openssl library is upgraded, which is available in PHP 7.1.
+             *
+             * The `aes-256-ctr' is arguably the best choice for cipher
+             * algorithm in these days.
+             */
+            $crypt->setCipher('aes-256-ctr');
+
+            /**
+             * Setting the encryption key.
+             *
+             * The key should have been previously generated in a cryptographically safe way.
+             *
+             * Bad key:
+             * "le password"
+             *
+             * Better (but still unsafe):
+             * "#1dj8$=dp?.ak//j1V$~%*0X"
+             *
+             * Good key:
+             * "T4\xb1\x8d\xa9\x98\x054t7w!z%C*F-Jk\x98\x05\x5c"
+             *
+             * Use your own key. Do not copy and paste this example key.
+             */
+            $key = "T4\xb1\x8d\xa9\x98\x054t7w!z%C*F-Jk\x98\x05\x5c";
+
+            $crypt->setKey($key);
 
             return $crypt;
         }
     );
 ```
 
-<h5 class='alert alert-danger' markdown='1'>Sending cookies data without encryption to clients including complex objects structures, resultsets, service information, etc. could expose internal application details that could be used by an attacker to attack the application. If you do not want to use encryption, we highly recommend you only send very basic cookie data like numbers or small string literals.</h5>
+<div class="alert alert-danger">
+    <p>
+        Sending cookies data without encryption to clients including complex objects structures, resultsets, service information, etc. could expose internal application details that could be used by an attacker to attack the application. If you do not want to use encryption, we highly recommend you only send very basic cookie data like numbers or small string literals.
+    </p>
+</div>

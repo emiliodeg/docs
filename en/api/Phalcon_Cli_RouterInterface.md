@@ -1,6 +1,12 @@
-# Interface **Phalcon\\Cli\\RouterInterface**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Cli\RouterInterface'
+---
+# Interface **Phalcon\Cli\RouterInterface**
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/cli/routerinterface.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/cli/routerinterface.zep)
 
 ## Methods
 abstract public  **setDefaultModule** (*mixed* $moduleName)

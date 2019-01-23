@@ -1,9 +1,15 @@
-# Interface **Phalcon\\Logger\\AdapterInterface**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Logger\AdapterInterface'
+---
+# Interface **Phalcon\Logger\AdapterInterface**
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/logger/adapterinterface.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/logger/adapterinterface.zep)
 
 ## Methods
-abstract public  **setFormatter** ([Phalcon\Logger\FormatterInterface](/en/3.2/api/Phalcon_Logger_FormatterInterface) $formatter)
+abstract public  **setFormatter** ([Phalcon\Logger\FormatterInterface](Phalcon_Logger_FormatterInterface) $formatter)
 
 ...
 

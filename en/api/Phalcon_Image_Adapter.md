@@ -1,8 +1,14 @@
-# Abstract class **Phalcon\\Image\\Adapter**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Image\Adapter'
+---
+# Abstract class **Phalcon\Image\Adapter**
 
-*implements* [Phalcon\Image\AdapterInterface](/en/3.2/api/Phalcon_Image_AdapterInterface)
+*implements* [Phalcon\Image\AdapterInterface](Phalcon_Image_AdapterInterface)
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/image/adapter.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/image/adapter.zep)
 
 All image adapters must use this class
 
@@ -85,7 +91,7 @@ Add a reflection to an image
 
 
 
-public  **watermark** ([Phalcon\Image\Adapter](/en/3.2/api/Phalcon_Image_Adapter) $watermark, [*mixed* $offsetX], [*mixed* $offsetY], [*mixed* $opacity])
+public  **watermark** ([Phalcon\Image\Adapter](Phalcon_Image_Adapter) $watermark, [*mixed* $offsetX], [*mixed* $offsetY], [*mixed* $opacity])
 
 Add a watermark to an image with the specified opacity
 
@@ -97,7 +103,7 @@ Add a text to an image with a specified opacity
 
 
 
-public  **mask** ([Phalcon\Image\Adapter](/en/3.2/api/Phalcon_Image_Adapter) $watermark)
+public  **mask** ([Phalcon\Image\Adapter](Phalcon_Image_Adapter) $watermark)
 
 Composite one image onto another
 

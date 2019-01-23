@@ -1,10 +1,16 @@
-# Class **Phalcon\\Cache\\Frontend\\Igbinary**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Cache\Frontend\Igbinary'
+---
+# Class **Phalcon\Cache\Frontend\Igbinary**
 
-*extends* class [Phalcon\Cache\Frontend\Data](/en/3.2/api/Phalcon_Cache_Frontend_Data)
+*extends* class [Phalcon\Cache\Frontend\Data](Phalcon_Cache_Frontend_Data)
 
-*implements* [Phalcon\Cache\FrontendInterface](/en/3.2/api/Phalcon_Cache_FrontendInterface)
+*implements* [Phalcon\Cache\FrontendInterface](Phalcon_Cache_FrontendInterface)
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/cache/frontend/igbinary.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/cache/frontend/igbinary.zep)
 
 Allows to cache native PHP data in a serialized form using igbinary extension
 
@@ -57,7 +63,7 @@ foreach ($robots as $robot) {
 ## Methods
 public  **__construct** ([*array* $frontendOptions])
 
-Phalcon\\Cache\\Frontend\\Data constructor
+Phalcon\Cache\Frontend\Data constructor
 
 
 

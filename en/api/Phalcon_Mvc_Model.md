@@ -1,20 +1,20 @@
-# Abstract class **Phalcon\\Mvc\\Model**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Mvc\Model'
+---
+# Abstract class **Phalcon\Mvc\Model**
 
-*implements* [Phalcon\Mvc\EntityInterface](/en/3.2/api/Phalcon_Mvc_EntityInterface), [Phalcon\Mvc\ModelInterface](/en/3.2/api/Phalcon_Mvc_ModelInterface), [Phalcon\Mvc\Model\ResultInterface](/en/3.2/api/Phalcon_Mvc_Model_ResultInterface), [Phalcon\Di\InjectionAwareInterface](/en/3.2/api/Phalcon_Di_InjectionAwareInterface), [Serializable](http://php.net/manual/en/class.serializable.php), [JsonSerializable](http://php.net/manual/en/class.jsonserializable.php)
+*implements* [Phalcon\Mvc\EntityInterface](Phalcon_Mvc_EntityInterface), [Phalcon\Mvc\ModelInterface](Phalcon_Mvc_ModelInterface), [Phalcon\Mvc\Model\ResultInterface](Phalcon_Mvc_Model_ResultInterface), [Phalcon\Di\InjectionAwareInterface](Phalcon_Di_InjectionAwareInterface), [Serializable](https://php.net/manual/en/class.serializable.php), [JsonSerializable](https://php.net/manual/en/class.jsonserializable.php)
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/mvc/model.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/mvc/model.zep)
 
-Phalcon\\Mvc\\Model connects business objects and database tables to create
-a persistable domain model where logic and data are presented in one wrapping.
-It‘s an implementation of the object-relational mapping (ORM).
+Phalcon\Mvc\Model connects business objects and database tables to create a persistable domain model where logic and data are presented in one wrapping. It's an implementation of the object-relational mapping (ORM).
 
-A model represents the information (data) of the application and the rules to manipulate that data.
-Models are primarily used for managing the rules of interaction with a corresponding database table.
-In most cases, each table in your database will correspond to one model in your application.
-The bulk of your application's business logic will be concentrated in the models.
+A model represents the information (data) of the application and the rules to manipulate that data. Models are primarily used for managing the rules of interaction with a corresponding database table. In most cases, each table in your database will correspond to one model in your application. The bulk of your application's business logic will be concentrated in the models.
 
-Phalcon\\Mvc\\Model is the first ORM written in Zephir/C languages for PHP, giving to developers high performance
-when interacting with databases while is also easy to use.
+Phalcon\Mvc\Model is the first ORM written in Zephir/C languages for PHP, giving to developers high performance when interacting with databases while is also easy to use.
 
 ```php
 <?php
@@ -26,12 +26,12 @@ $robot->name = "Astro Boy";
 $robot->year = 1952;
 
 if ($robot->save() === false) {
-    echo "Umh, We can store robots: ";
+    echo "Umh, We cannot store robots: ";
 
     $messages = $robot->getMessages();
 
     foreach ($messages as $message) {
-        echo message;
+        echo $message;
     }
 } else {
     echo "Great, a new robot was saved successfully!";
@@ -56,13 +56,13 @@ if ($robot->save() === false) {
 *integer* **DIRTY_STATE_DETACHED**
 
 ## Methods
-final public  **__construct** ([*mixed* $data], [[Phalcon\DiInterface](/en/3.2/api/Phalcon_DiInterface) $dependencyInjector], [[Phalcon\Mvc\Model\ManagerInterface](/en/3.2/api/Phalcon_Mvc_Model_ManagerInterface) $modelsManager])
+final public  **__construct** ([*mixed* $data], [[Phalcon\DiInterface](Phalcon_DiInterface) $dependencyInjector], [[Phalcon\Mvc\Model\ManagerInterface](Phalcon_Mvc_Model_ManagerInterface) $modelsManager])
 
-Phalcon\\Mvc\\Model constructor
+Phalcon\Mvc\Model constructor
 
 
 
-public  **setDI** ([Phalcon\DiInterface](/en/3.2/api/Phalcon_DiInterface) $dependencyInjector)
+public  **setDI** ([Phalcon\DiInterface](Phalcon_DiInterface) $dependencyInjector)
 
 Sets the dependency injection container
 
@@ -74,7 +74,7 @@ Returns the dependency injection container
 
 
 
-protected  **setEventsManager** ([Phalcon\Events\ManagerInterface](/en/3.2/api/Phalcon_Events_ManagerInterface) $eventsManager)
+protected  **setEventsManager** ([Phalcon\Events\ManagerInterface](Phalcon_Events_ManagerInterface) $eventsManager)
 
 Sets a custom events manager
 
@@ -98,7 +98,7 @@ Returns the models manager related to the entity instance
 
 
 
-public  **setTransaction** ([Phalcon\Mvc\Model\TransactionInterface](/en/3.2/api/Phalcon_Mvc_Model_TransactionInterface) $transaction)
+public  **setTransaction** ([Phalcon\Mvc\Model\TransactionInterface](Phalcon_Mvc_Model_TransactionInterface) $transaction)
 
 Sets a transaction related to the Model instance
 
@@ -199,13 +199,13 @@ Returns the DependencyInjection connection service name used to write data relat
 
 public  **setDirtyState** (*mixed* $dirtyState)
 
-Sets the dirty state of the object using one of the DIRTY_STATE_* constants
+Sets the dirty state of the object using one of the `DIRTY_STATE_*` constants
 
 
 
 public  **getDirtyState** ()
 
-Returns one of the DIRTY_STATE_* constants telling if the record exists in the database or not
+Returns one of the `DIRTY_STATE_*` constants telling if the record exists in the database or not
 
 
 
@@ -221,7 +221,7 @@ Gets the connection used to write data to the model
 
 
 
-public [Phalcon\Mvc\Model](/en/3.2/api/Phalcon_Mvc_Model) **assign** (*array* $data, [*mixed* $dataColumnMap], [*array* $whiteList])
+public [Phalcon\Mvc\Model](Phalcon_Mvc_Model) **assign** (*array* $data, [*mixed* $dataColumnMap], [*array* $whiteList])
 
 Assigns values to a model from an array
 
@@ -273,7 +273,7 @@ $robot->assign(
 
 
 
-public static  **cloneResultMap** ([Phalcon\Mvc\ModelInterface](/en/3.2/api/Phalcon_Mvc_ModelInterface) | [Phalcon\Mvc\Model\Row](/en/3.2/api/Phalcon_Mvc_Model_Row) $base, *array* $data, *array* $columnMap, [*int* $dirtyState], [*boolean* $keepSnapshots])
+public static  **cloneResultMap** ([Phalcon\Mvc\ModelInterface](Phalcon_Mvc_ModelInterface) | [Phalcon\Mvc\Model\Row](Phalcon_Mvc_Model_Row) $base, *array* $data, *array* $columnMap, [*int* $dirtyState], [*boolean* $keepSnapshots])
 
 Assigns values to a model from an array, returning a new model.
 
@@ -299,7 +299,7 @@ Returns an hydrated result based on the data and the column map
 
 
 
-public static [Phalcon\Mvc\ModelInterface](/en/3.2/api/Phalcon_Mvc_ModelInterface) **cloneResult** ([Phalcon\Mvc\ModelInterface](/en/3.2/api/Phalcon_Mvc_ModelInterface) $base, *array* $data, [*int* $dirtyState])
+public static [Phalcon\Mvc\ModelInterface](Phalcon_Mvc_ModelInterface) **cloneResult** ([Phalcon\Mvc\ModelInterface](Phalcon_Mvc_ModelInterface) $base, *array* $data, [*int* $dirtyState])
 
 Assigns values to a model from an array returning a new model
 
@@ -400,19 +400,19 @@ echo "The first virtual robot name is ", $robot->name;
 
 
 
-public static  **query** ([[Phalcon\DiInterface](/en/3.2/api/Phalcon_DiInterface) $dependencyInjector])
+public static  **query** ([[Phalcon\DiInterface](Phalcon_DiInterface) $dependencyInjector])
 
 Create a criteria for a specific model
 
 
 
-protected *boolean* **_exists** ([Phalcon\Mvc\Model\MetaDataInterface](/en/3.2/api/Phalcon_Mvc_Model_MetaDataInterface) $metaData, [Phalcon\Db\AdapterInterface](/en/3.2/api/Phalcon_Db_AdapterInterface) $connection, [*string* | *array* $table])
+protected *boolean* **_exists** ([Phalcon\Mvc\Model\MetaDataInterface](Phalcon_Mvc_Model_MetaDataInterface) $metaData, [Phalcon\Db\AdapterInterface](Phalcon_Db_AdapterInterface) $connection, [*string* | *array* $table])
 
 Checks whether the current record already exists
 
 
 
-protected static [Phalcon\Mvc\Model\ResultsetInterface](/en/3.2/api/Phalcon_Mvc_Model_ResultsetInterface) **_groupResult** (*mixed* $functionName, *string* $alias, *array* $parameters)
+protected static [Phalcon\Mvc\Model\ResultsetInterface](Phalcon_Mvc_Model_ResultsetInterface) **_groupResult** (*mixed* $functionName, *string* $alias, *array* $parameters)
 
 Generate a PHQL SELECT statement for an aggregate
 
@@ -578,7 +578,7 @@ Cancel the current operation
 
 
 
-public  **appendMessage** ([Phalcon\Mvc\Model\MessageInterface](/en/3.2/api/Phalcon_Mvc_Model_MessageInterface) $message)
+public  **appendMessage** ([Phalcon\Mvc\Model\MessageInterface](Phalcon_Mvc_Model_MessageInterface) $message)
 
 Appends a customized message on the validation process
 
@@ -606,7 +606,7 @@ class Robots extends Model
 
 
 
-protected  **validate** ([Phalcon\ValidationInterface](/en/3.2/api/Phalcon_ValidationInterface) $validator)
+protected  **validate** ([Phalcon\ValidationInterface](Phalcon_ValidationInterface) $validator)
 
 Executes validators on every validation call
 
@@ -654,7 +654,7 @@ use Phalcon\Mvc\Model;
 use Phalcon\Validation;
 use Phalcon\Validation\Validator\ExclusionIn;
 
-class Subscriptors extends Model
+class Subscribers extends Model
 {
     public function validation()
     {
@@ -728,7 +728,7 @@ Reads both "hasMany" and "hasOne" relations and checks the virtual foreign keys 
 
 
 
-protected  **_preSave** ([Phalcon\Mvc\Model\MetaDataInterface](/en/3.2/api/Phalcon_Mvc_Model_MetaDataInterface) $metaData, *mixed* $exists, *mixed* $identityField)
+protected  **_preSave** ([Phalcon\Mvc\Model\MetaDataInterface](Phalcon_Mvc_Model_MetaDataInterface) $metaData, *mixed* $exists, *mixed* $identityField)
 
 Executes internal hooks before save a record
 
@@ -740,25 +740,25 @@ Executes internal events after save a record
 
 
 
-protected *boolean* **_doLowInsert** ([Phalcon\Mvc\Model\MetaDataInterface](/en/3.2/api/Phalcon_Mvc_Model_MetaDataInterface) $metaData, [Phalcon\Db\AdapterInterface](/en/3.2/api/Phalcon_Db_AdapterInterface) $connection, *string* | *array* $table, *boolean* | *string* $identityField)
+protected *boolean* **_doLowInsert** ([Phalcon\Mvc\Model\MetaDataInterface](Phalcon_Mvc_Model_MetaDataInterface) $metaData, [Phalcon\Db\AdapterInterface](Phalcon_Db_AdapterInterface) $connection, *string* | *array* $table, *boolean* | *string* $identityField)
 
 Sends a pre-build INSERT SQL statement to the relational database system
 
 
 
-protected *boolean* **_doLowUpdate** ([Phalcon\Mvc\Model\MetaDataInterface](/en/3.2/api/Phalcon_Mvc_Model_MetaDataInterface) $metaData, [Phalcon\Db\AdapterInterface](/en/3.2/api/Phalcon_Db_AdapterInterface) $connection, *string* | *array* $table)
+protected *boolean* **_doLowUpdate** ([Phalcon\Mvc\Model\MetaDataInterface](Phalcon_Mvc_Model_MetaDataInterface) $metaData, [Phalcon\Db\AdapterInterface](Phalcon_Db_AdapterInterface) $connection, *string* | *array* $table)
 
 Sends a pre-build UPDATE SQL statement to the relational database system
 
 
 
-protected *boolean* **_preSaveRelatedRecords** ([Phalcon\Db\AdapterInterface](/en/3.2/api/Phalcon_Db_AdapterInterface) $connection, [Phalcon\Mvc\ModelInterface](/en/3.2/api/Phalcon_Mvc_ModelInterface[]) $related)
+protected *boolean* **_preSaveRelatedRecords** ([Phalcon\Db\AdapterInterface](Phalcon_Db_AdapterInterface) $connection, [Phalcon\Mvc\ModelInterface](Phalcon_Mvc_ModelInterface) $related)
 
 Saves related records that must be stored prior to save the master record
 
 
 
-protected *boolean* **_postSaveRelatedRecords** ([Phalcon\Db\AdapterInterface](/en/3.2/api/Phalcon_Db_AdapterInterface) $connection, [Phalcon\Mvc\ModelInterface](/en/3.2/api/Phalcon_Mvc_ModelInterface[]) $related)
+protected *boolean* **_postSaveRelatedRecords** ([Phalcon\Db\AdapterInterface](Phalcon_Db_AdapterInterface) $connection, [Phalcon\Mvc\ModelInterface](Phalcon_Mvc_ModelInterface) $related)
 
 Save the related records assigned in the has-one/has-many relations
 
@@ -916,8 +916,6 @@ generated INSERT/UPDATE statement
 ```php
 <?php
 
-<?php
-
 class Robots extends \Phalcon\Mvc\Model
 {
     public function initialize()
@@ -940,8 +938,6 @@ Sets a list of attributes that must be skipped from the
 generated INSERT statement
 
 ```php
-<?php
-
 <?php
 
 class Robots extends \Phalcon\Mvc\Model
@@ -968,8 +964,6 @@ generated UPDATE statement
 ```php
 <?php
 
-<?php
-
 class Robots extends \Phalcon\Mvc\Model
 {
     public function initialize()
@@ -992,8 +986,6 @@ Sets a list of attributes that must be skipped from the
 generated UPDATE statement
 
 ```php
-<?php
-
 <?php
 
 class Robots extends \Phalcon\Mvc\Model
@@ -1019,13 +1011,78 @@ Setup a 1-1 relation between two models
 ```php
 <?php
 
+class Robots extends \Phalcon\Mvc\Model
+{
+    public function initialize()
+    {
+        $this->hasOne("id", "RobotsDescription", "robots_id");
+    }
+}
+
+```
+
+Using more than one field:
+
+```php
 <?php
 
 class Robots extends \Phalcon\Mvc\Model
 {
     public function initialize()
     {
-        $this->hasOne("id", "RobotsDescription", "robots_id");
+        $this->hasOne(["id", "type"], "RobotParts", ["robots_id", "robots_type"]);
+    }
+}
+
+```
+
+Using options:
+
+```php
+<?php
+
+class Robots extends \Phalcon\Mvc\Model
+{
+    public function initialize()
+    {
+        $this->hasOne(
+            "id", 
+            "RobotParts", 
+            "robots_id",
+            [
+                "reusable" => true,    // cache the results of this relationship
+                "alias"    => "parts", // Alias of the relationship
+            ]
+        );
+    }
+}
+
+```
+
+Using conditionals:
+
+```php
+<?php
+
+class Robots extends \Phalcon\Mvc\Model
+{
+    public function initialize()
+    {
+        $this->hasOne(
+            "id", 
+            "RobotParts", 
+            "robots_id",
+            [
+                "reusable" => true,           // cache the results of this relationship
+                "alias"    => "partsTypeOne", // Alias of the relationship
+                "params"   => [               // Acts like a filter
+                    "conditions" => "type = :type:",
+                    "bind"       => [
+                        "type" => 1,
+                    ],
+                ],
+            ]
+        );
     }
 }
 
@@ -1038,8 +1095,6 @@ protected  **belongsTo** (*mixed* $fields, *mixed* $referenceModel, *mixed* $ref
 Setup a reverse 1-1 or n-1 relation between two models
 
 ```php
-<?php
-
 <?php
 
 class RobotsParts extends \Phalcon\Mvc\Model
@@ -1061,8 +1116,6 @@ Setup a 1-n relation between two models
 ```php
 <?php
 
-<?php
-
 class Robots extends \Phalcon\Mvc\Model
 {
     public function initialize()
@@ -1075,13 +1128,11 @@ class Robots extends \Phalcon\Mvc\Model
 
 
 
-protected [Phalcon\Mvc\Model\Relation](/en/3.2/api/Phalcon_Mvc_Model_Relation) **hasManyToMany** (*string* | *array* $fields, *string* $intermediateModel, *string* | *array* $intermediateFields, *string* | *array* $intermediateReferencedFields, *mixed* $referenceModel, *string* | *array* $referencedFields, [*array* $options])
+protected [Phalcon\Mvc\Model\Relation](Phalcon_Mvc_Model_Relation) **hasManyToMany** (*string* | *array* $fields, *string* $intermediateModel, *string* | *array* $intermediateFields, *string* | *array* $intermediateReferencedFields, *mixed* $referenceModel, *string* | *array* $referencedFields, [*array* $options])
 
 Setup an n-n relation between two models, through an intermediate relation
 
 ```php
-<?php
-
 <?php
 
 class Robots extends \Phalcon\Mvc\Model
@@ -1095,7 +1146,7 @@ class Robots extends \Phalcon\Mvc\Model
             "robots_id",
             "parts_id",
             "Parts",
-            "id",
+            "id"
         );
     }
 }
@@ -1104,13 +1155,11 @@ class Robots extends \Phalcon\Mvc\Model
 
 
 
-public  **addBehavior** ([Phalcon\Mvc\Model\BehaviorInterface](/en/3.2/api/Phalcon_Mvc_Model_BehaviorInterface) $behavior)
+public  **addBehavior** ([Phalcon\Mvc\Model\BehaviorInterface](Phalcon_Mvc_Model_BehaviorInterface) $behavior)
 
 Setups a behavior in a model
 
 ```php
-<?php
-
 <?php
 
 use Phalcon\Mvc\Model;
@@ -1142,8 +1191,6 @@ protected  **keepSnapshots** (*mixed* $keepSnapshot)
 Sets if the model must keep the original record snapshot in memory
 
 ```php
-<?php
-
 <?php
 
 use Phalcon\Mvc\Model;
@@ -1264,8 +1311,6 @@ Sets if a model must use dynamic update instead of the all-field update
 ```php
 <?php
 
-<?php
-
 use Phalcon\Mvc\Model;
 
 class Robots extends Model
@@ -1280,10 +1325,33 @@ class Robots extends Model
 
 
 
-public [Phalcon\Mvc\Model\ResultsetInterface](/en/3.2/api/Phalcon_Mvc_Model_ResultsetInterface) **getRelated** (*string* $alias, [*array* $arguments])
+public [Phalcon\Mvc\Model\ResultsetInterface](Phalcon_Mvc_Model_ResultsetInterface) **getRelated** (*string* $alias, [*array* $arguments])
 
 Returns related records based on defined relations
 
+```php
+<?php
+
+// Gets the relationship data named "parts"
+$parts = $robot->getRelated('parts');
+
+// Gets the relationship data named "parts" sorted descending by name
+$parts = $robot->getRelated('parts', ['order' => 'name DESC']);
+
+// Gets the relationship data named "parts" filtered
+$parts = $robot->getRelated('parts', ['conditions' => 'type = 1']);
+
+$parts = $robot->getRelated(
+    'parts', 
+    [
+        'conditions' => 'type = :type:',
+        'bind'       => [
+            'type' => 1,
+        ]
+    ]
+);
+
+```
 
 
 protected *mixed* **_getRelatedRecords** (*string* $modelName, *string* $method, *array* $arguments)
@@ -1292,7 +1360,7 @@ Returns related records defined relations depending on the method name
 
 
 
-final protected static [Phalcon\Mvc\ModelInterface](/en/3.2/api/Phalcon_Mvc_ModelInterface[]) | [Phalcon\Mvc\ModelInterface](/en/3.2/api/Phalcon_Mvc_ModelInterface) | *boolean* **_invokeFinder** (*string* $method, *array* $arguments)
+final protected static [Phalcon\Mvc\ModelInterface](Phalcon_Mvc_ModelInterface) | [Phalcon\Mvc\ModelInterface](Phalcon_Mvc_ModelInterface) | *boolean* **_invokeFinder** (*string* $method, *array* $arguments)
 
 Try to check if the query must invoke a finder
 
@@ -1322,7 +1390,7 @@ Check for, and attempt to use, possible setter.
 
 
 
-public [Phalcon\Mvc\Model\Resultset](/en/3.2/api/Phalcon_Mvc_Model_Resultset) | [Phalcon\Mvc\Model](/en/3.2/api/Phalcon_Mvc_Model) **__get** (*string* $property)
+public [Phalcon\Mvc\Model\Resultset](Phalcon_Mvc_Model_Resultset) | [Phalcon\Mvc\Model](Phalcon_Mvc_Model) **__get** (*string* $property)
 
 Magic method to get related records using the relation alias as a property
 

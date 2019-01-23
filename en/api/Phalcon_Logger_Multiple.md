@@ -1,6 +1,12 @@
-# Class **Phalcon\\Logger\\Multiple**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Logger\Multiple'
+---
+# Class **Phalcon\Logger\Multiple**
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/logger/multiple.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/logger/multiple.zep)
 
 Handles multiples logger handlers
 
@@ -21,13 +27,13 @@ public  **getLogLevel** ()
 ...
 
 
-public  **push** ([Phalcon\Logger\AdapterInterface](/en/3.2/api/Phalcon_Logger_AdapterInterface) $logger)
+public  **push** ([Phalcon\Logger\AdapterInterface](Phalcon_Logger_AdapterInterface) $logger)
 
 Pushes a logger to the logger tail
 
 
 
-public  **setFormatter** ([Phalcon\Logger\FormatterInterface](/en/3.2/api/Phalcon_Logger_FormatterInterface) $formatter)
+public  **setFormatter** ([Phalcon\Logger\FormatterInterface](Phalcon_Logger_FormatterInterface) $formatter)
 
 Sets a global formatter
 

@@ -1,6 +1,12 @@
-# Interface **Phalcon\\Http\\CookieInterface**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Http\CookieInterface'
+---
+# Interface **Phalcon\Http\CookieInterface**
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/http/cookieinterface.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/http/cookieinterface.zep)
 
 ## Methods
 abstract public  **setValue** (*mixed* $value)

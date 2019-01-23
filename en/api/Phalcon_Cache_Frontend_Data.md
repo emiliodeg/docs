@@ -1,8 +1,14 @@
-# Class **Phalcon\\Cache\\Frontend\\Data**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Cache\Frontend\Data'
+---
+# Class **Phalcon\Cache\Frontend\Data**
 
-*implements* [Phalcon\Cache\FrontendInterface](/en/3.2/api/Phalcon_Cache_FrontendInterface)
+*implements* [Phalcon\Cache\FrontendInterface](Phalcon_Cache_FrontendInterface)
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/cache/frontend/data.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/cache/frontend/data.zep)
 
 Allows to cache native PHP data in a serialized form
 
@@ -58,7 +64,7 @@ foreach ($robots as $robot) {
 ## Methods
 public  **__construct** ([*array* $frontendOptions])
 
-Phalcon\\Cache\\Frontend\\Data constructor
+Phalcon\Cache\Frontend\Data constructor
 
 
 

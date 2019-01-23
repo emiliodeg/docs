@@ -1,6 +1,12 @@
-# Class **Phalcon\\Cli\\Router\\Route**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Cli\Router\Route'
+---
+# Class **Phalcon\Cli\Router\Route**
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/cli/router/route.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/cli/router/route.zep)
 
 This class represents every route added to the router
 
@@ -11,7 +17,7 @@ This class represents every route added to the router
 ## Methods
 public  **__construct** (*string* $pattern, [*array* $paths])
 
-Phalcon\\Cli\\Router\\Route constructor
+Phalcon\Cli\Router\Route constructor
 
 
 
@@ -57,7 +63,7 @@ $router->add(
 
 
 
-public [Phalcon\Cli\Router\Route](/en/3.2/api/Phalcon_Cli_Router_Route) **beforeMatch** (*callback* $callback)
+public [Phalcon\Cli\Router\Route](Phalcon_Cli_Router_Route) **beforeMatch** (*callback* $callback)
 
 Sets a callback that is called if the route is matched.
 The developer can implement any arbitrary conditions here
@@ -101,7 +107,7 @@ Returns the paths using positions as keys and names as values
 
 
 
-public [Phalcon\Cli\Router\Route](/en/3.2/api/Phalcon_Cli_Router_Route) **convert** (*string* $name, *callable* $converter)
+public [Phalcon\Cli\Router\Route](Phalcon_Cli_Router_Route) **convert** (*string* $name, *callable* $converter)
 
 Adds a converter to perform an additional transformation for certain parameter
 

@@ -1,36 +1,10 @@
-<div class='article-menu' markdown='1'>
-
-- [Requirements](#requirements)
-    - [Hardware](#requirements-hardware)
-    - [Software](#requirements-software)
-- [Installation](#installation)
-    - [Linux](#installation-linux)
-        - [DEB based distributions (Debian, Ubuntu, etc.)](#installation-linux-debian)
-            - [Repository installation](#installation-linux-debian-repository)
-                - [Stable releases](#installation-linux-debian-repository-stable)
-                - [Nightly releases](#installation-linux-debian-repository-nightly)
-            - [Phalcon installation](#installation-linux-debian-phalcon)
-                - [PHP 5.x](#installation-linux-debian-phalcon-php5)
-                - [PHP 7](#installation-linux-debian-phalcon-php7)
-            - [Additional PPAs](#installation-linux-debian-other-ppa)
-        - [RPM based distributions (CentOS, Fedora, etc.)](#installation-linux-rpm)
-            - [Repository installation](#installation-linux-rpm-repository)
-                - [Stable releases](#installation-linux-rpm-repository-stable)
-                - [Nightly releases](#installation-linux-rpm-repository-nightly)
-            - [Phalcon installation](#installation-linux-rpm-phalcon)
-                - [PHP 5.x](#installation-linux-rpm-phalcon-php5)
-                - [PHP 7](#installation-linux-rpm-phalcon-php7)
-            - [Additional RPMs](installation-linux-rpm-other-rpm)
-        - [FreeBSD](#installation-freebsd)
-        - [Gentoo](#installation-linux-gentoo)
-    - [MacOS](#installation-macos)
-        - [Brew](#installation-macos-brew)
-        - [MacPorts](#installation-macos-macports)
-    - [Windows](#installation-windows)
-    - [Compile from sources](#installation-sources)
-    - [Advanced Compilation](#installation-sources-advanced)
-
-</div>
+---
+layout: article
+language: 'en'
+version: '4.0'
+---
+##### This article reflects v3.4 and has not yet been revised
+{:.alert .alert-danger}
 
 <a name='requirements'></a>
 # Requirements
@@ -52,19 +26,20 @@ Phalcon need the following extensions to run (minimal):
 
 * `curl`
 * `gettext`
-* `gd2` (for the Image class)
-* `libpcre3-dev` (Debian/Ubuntu), `pcre-devel` (CentOS), `pcre` (Mac OS)
+* `gd2` (to use the `Phalcon\Image\Adapter\Gd` class)
+* `libpcre3-dev` (Debian/Ubuntu), `pcre-devel` (CentOS), `pcre` (macOS)
 * `json`
 * `mbstring`
 * `pdo_*`
 * `fileinfo`
 * `openssl`
 
+<a name='requirements-software-optional'></a>
 ### Optional depending on the needs of your application
-* [PDO](http://php.net/manual/en/book.pdo.php) Extension as well as the relevant RDBMS specific extension (i.e. [MySQL](http://php.net/manual/en/ref.pdo-mysql.php), [PostgreSql](http://php.net/manual/en/ref.pdo-pgsql.php) etc.)
-* [OpenSSL](http://php.net/manual/en/book.openssl.php) Extension
-* [Mbstring](http://php.net/manual/en/book.mbstring.php) Extension
-* [Memcache](http://php.net/manual/en/book.memcache.php), [Memcached](http://php.net/manual/en/book.memcached.php) or other relevant cache adapters depending on your usage of cache.
+* [PDO](https://php.net/manual/en/book.pdo.php) Extension as well as the relevant RDBMS specific extension (i.e. [MySQL](https://php.net/manual/en/ref.pdo-mysql.php), [PostgreSql](https://php.net/manual/en/ref.pdo-pgsql.php) etc.)
+* [OpenSSL](https://php.net/manual/en/book.openssl.php) Extension
+* [Mbstring](https://php.net/manual/en/book.mbstring.php) Extension
+* [Memcache](https://php.net/manual/en/book.memcache.php), [Memcached](https://php.net/manual/en/book.memcached.php) or other relevant cache adapters depending on your usage of cache
 
 <a name='installation'></a>
 # Installation
@@ -72,7 +47,7 @@ Since Phalcon is compiled as a PHP extension, its installation is somewhat diffe
 
 <a name='installation-linux'></a>
 ## Linux
-To install Phalcon on linux, you will need to add our repository in your distribution and then install it.
+To install Phalcon on Linux, you will need to add our repository in your distribution and then install it.
 
 <a name='installation-linux-debian'></a>
 ### DEB based distributions (Debian, Ubuntu, etc.)
@@ -117,7 +92,7 @@ sudo apt-get install php7.0-phalcon
 <a name='installation-linux-debian-other-ppa'></a>
 #### Additional PPAs
 #### Ondřej Surý
-If you do not wish to use our packagecloud.io repository, you can always use the one offered by [Ondřej Surý](https://launchpad.net/~ondrej/+archive/ubuntu/php/).
+If you do not wish to use our repository at [packagecloud.io](https://packagecloud.io/phalcon), you can always use the one offered by [Ondřej Surý](https://launchpad.net/~ondrej/+archive/ubuntu/php/).
 
 Installation of the repo:
 ```php
@@ -130,8 +105,6 @@ and Phalcon:
 ```php
 sudo apt-get install php-phalcon
 ```
-
-https://launchpad.net/~ondrej/+archive/ubuntu/php/
 
 <a name='installation-linux-rpm'></a>
 ### RPM based distributions (CentOS, Fedora, etc.)
@@ -176,7 +149,7 @@ sudo yum install php70u-phalcon
 <a name='installation-linux-rpm-other-rpm'></a>
 #### Additional RPMs
 ##### Remi
-Remi maintains an excellent repository for RPM based installations. You can find instructions on how to enable it for your distribution [here](https://blog.remirepo.net/pages/Config-en)
+[Remi Collet](https://github.com/remicollet) maintains an excellent repository for RPM based installations. You can find instructions on how to enable it for your distribution [here](https://blog.remirepo.net/pages/Config-en).
 
 Installing Phalcon after that is as easy as:
 
@@ -209,8 +182,8 @@ make install clean
 An overlay for installing Phalcon can be found here [https://github.com/smoke/phalcon-gentoo-overlay](https://github.com/smoke/phalcon-gentoo-overlay)
 
 <a name='installation-macos'></a>
-## Mac OS X
-On a Mac OS X system you can compile and install the extension with `brew`, `macports` or the source code:
+## macOS
+On a macOS system you can compile and install the extension with `brew`, `macports` or the source code:
 
 ### Requirements
 * PHP 5.5.x/5.6.x/7.0.x/7.1.x development resources
@@ -218,12 +191,17 @@ On a Mac OS X system you can compile and install the extension with `brew`, `mac
 
 <a name='installation-macos-brew'></a>
 ### Brew
+
+As the [homebrew/php tap has been deprecated](https://brew.sh/2018/01/19/homebrew-1.5.0/) and is in the process of being removed, A custom repository for Phalcon has been created.
+
+PHP 5.5 has not been ported to homebrew/core and as such no longer exists. PHP 7.2 on the other hand has been added. 
+
 ```bash
-brew tap homebrew/homebrew-php
-brew install php55-phalcon
+brew tap tigerstrikemedia/homebrew-phalconphp
 brew install php56-phalcon
 brew install php70-phalcon
 brew install php71-phalcon
+brew install php72-phalcon
 ```
 
 <a name='installation-macos-macports'></a>
@@ -247,7 +225,7 @@ To use Phalcon on Windows, you will need to install the phalcon.dll. We have com
 
 Identify your PHP installation as well as architecture. If you download the wrong DLL, Phalcon will not work. `phpinfo()` contains this information. In the example below, we will need the NTS version of the DLL:
 
-![phpinfo](/images/content/phpinfo-api.png)
+![phpinfo](/assets/images/content/phpinfo-api.png)
 
 The available DLLs are:
 
@@ -261,7 +239,10 @@ The available DLLs are:
 | x64          | 5.6     | Non Thread safe (NTS) |
 | x86          | 5.6     | Thread safe           |
 | x86          | 5.6     | Non Thread safe (NTS) |
-
+| x64          | 5.5     | Thread safe           |
+| x64          | 5.5     | Non Thread safe (NTS) |
+| x86          | 5.5     | Thread safe           |
+| x86          | 5.5     | Non Thread safe (NTS) |
 
 Edit your php.ini file and then append at the end:
 
@@ -273,11 +254,11 @@ Restart your webserver.
 
 <a name='installation-sources'></a>
 ## Compile from Sources
-Compiling from source is similar to most environments (Linux/Mac).
+Compiling from source is similar to most environments (Linux/macOS).
 
 ### Requirements
 * PHP 5.5.x/5.6.x/7.0.x/7.1.x development resources
-* GCC compiler (Linux/Solaris/FreeBSD) or Xcode (MacOS)
+* GCC compiler (Linux/Solaris/FreeBSD) or Xcode (macOS)
 * re2c >= 0.13
 * libpcre-dev
 
@@ -299,7 +280,7 @@ sudo yum install php-devel pcre-devel gcc make
 ```
 
 ### Compile Phalcon
-We first need to clone Phalcon from the Github repository
+We first need to clone Phalcon from the GitHub repository
 ```bash
 git clone https://github.com/phalcon/cphalcon
 ```
@@ -341,7 +322,7 @@ sudo ./install --arch 64bits
 sudo ./install --arch safe
 ```
 
-If the automatic installer fails you can build the extension manually
+If the automatic installer fails you can build the extension manually:
 
 ```bash
 git clone https://github.com/phalcon/cphalcon
@@ -363,7 +344,7 @@ make
 make install
 ```
 
-If you have specific php versions running
+If you have specific php versions running:
 
 ```bash
 git clone https://github.com/phalcon/cphalcon

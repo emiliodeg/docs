@@ -1,8 +1,14 @@
-# Class **Phalcon\\Cache\\Frontend\\Json**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Cache\Frontend\Json'
+---
+# Class **Phalcon\Cache\Frontend\Json**
 
-*implements* [Phalcon\Cache\FrontendInterface](/en/3.2/api/Phalcon_Cache_FrontendInterface)
+*implements* [Phalcon\Cache\FrontendInterface](Phalcon_Cache_FrontendInterface)
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/cache/frontend/json.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/cache/frontend/json.zep)
 
 Allows to cache data converting/deconverting them to JSON.
 
@@ -45,7 +51,7 @@ $data = $cache->get("my-data");
 ## Methods
 public  **__construct** ([*array* $frontendOptions])
 
-Phalcon\\Cache\\Frontend\\Base64 constructor
+Phalcon\Cache\Frontend\Base64 constructor
 
 
 

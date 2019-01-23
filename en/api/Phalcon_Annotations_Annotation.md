@@ -1,6 +1,12 @@
-# Class **Phalcon\\Annotations\\Annotation**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Annotations\Annotation'
+---
+# Class **Phalcon\Annotations\Annotation**
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/annotations/annotation.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/annotations/annotation.zep)
 
 Represents a single annotation in an annotations collection
 
@@ -8,7 +14,7 @@ Represents a single annotation in an annotations collection
 ## Methods
 public  **__construct** (*array* $reflectionData)
 
-Phalcon\\Annotations\\Annotation constructor
+Phalcon\Annotations\Annotation constructor
 
 
 

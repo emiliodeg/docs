@@ -1,6 +1,12 @@
-# Class **Phalcon\\Cache\\Multiple**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Cache\Multiple'
+---
+# Class **Phalcon\Cache\Multiple**
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/cache/multiple.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/cache/multiple.zep)
 
 Allows to read to chained backend adapters writing to multiple backends
 
@@ -65,13 +71,13 @@ $cache->save("my-key", $data);
 
 
 ## Methods
-public  **__construct** ([[Phalcon\Cache\BackendInterface](/en/3.2/api/Phalcon_Cache_BackendInterface[]) $backends])
+public  **__construct** ([[Phalcon\Cache\BackendInterface](Phalcon_Cache_BackendInterface) $backends])
 
-Phalcon\\Cache\\Multiple constructor
+Phalcon\Cache\Multiple constructor
 
 
 
-public  **push** ([Phalcon\Cache\BackendInterface](/en/3.2/api/Phalcon_Cache_BackendInterface) $backend)
+public  **push** ([Phalcon\Cache\BackendInterface](Phalcon_Cache_BackendInterface) $backend)
 
 Adds a backend
 

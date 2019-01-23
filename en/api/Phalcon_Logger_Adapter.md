@@ -1,10 +1,16 @@
-# Abstract class **Phalcon\\Logger\\Adapter**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Logger\Adapter'
+---
+# Abstract class **Phalcon\Logger\Adapter**
 
-*implements* [Phalcon\Logger\AdapterInterface](/en/3.2/api/Phalcon_Logger_AdapterInterface)
+*implements* [Phalcon\Logger\AdapterInterface](Phalcon_Logger_AdapterInterface)
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/logger/adapter.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/logger/adapter.zep)
 
-Base class for Phalcon\\Logger adapters
+Base class for Phalcon\Logger adapters
 
 
 ## Methods
@@ -20,7 +26,7 @@ Returns the current log level
 
 
 
-public  **setFormatter** ([Phalcon\Logger\FormatterInterface](/en/3.2/api/Phalcon_Logger_FormatterInterface) $formatter)
+public  **setFormatter** ([Phalcon\Logger\FormatterInterface](Phalcon_Logger_FormatterInterface) $formatter)
 
 Sets the message formatter
 
@@ -104,12 +110,12 @@ Logs messages to the internal logger. Appends logs to the logger
 
 
 
-abstract public  **getFormatter** () inherited from [Phalcon\Logger\AdapterInterface](/en/3.2/api/Phalcon_Logger_AdapterInterface)
+abstract public  **getFormatter** () inherited from [Phalcon\Logger\AdapterInterface](Phalcon_Logger_AdapterInterface)
 
 ...
 
 
-abstract public  **close** () inherited from [Phalcon\Logger\AdapterInterface](/en/3.2/api/Phalcon_Logger_AdapterInterface)
+abstract public  **close** () inherited from [Phalcon\Logger\AdapterInterface](Phalcon_Logger_AdapterInterface)
 
 ...
 

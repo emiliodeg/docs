@@ -1,6 +1,12 @@
-# Class **Phalcon\\Queue\\Beanstalk\\Job**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Queue\Beanstalk\Job'
+---
+# Class **Phalcon\Queue\Beanstalk\Job**
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/queue/beanstalk/job.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/queue/beanstalk/job.zep)
 
 Represents a job in a beanstalk queue
 
@@ -18,7 +24,7 @@ public  **getBody** ()
 
 
 
-public  **__construct** ([Phalcon\Queue\Beanstalk](/en/3.2/api/Phalcon_Queue_Beanstalk) $queue, *mixed* $id, *mixed* $body)
+public  **__construct** ([Phalcon\Queue\Beanstalk](Phalcon_Queue_Beanstalk) $queue, *mixed* $id, *mixed* $body)
 
 
 

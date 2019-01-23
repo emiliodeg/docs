@@ -1,8 +1,14 @@
-# Class **Phalcon\\Assets\\Inline**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Assets\Inline'
+---
+# Class **Phalcon\Assets\Inline**
 
-*implements* [Phalcon\Assets\ResourceInterface](/en/3.2/api/Phalcon_Assets_ResourceInterface)
+*implements* [Phalcon\Assets\ResourceInterface](Phalcon_Assets_ResourceInterface)
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/assets/inline.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/assets/inline.zep)
 
 Represents an inline asset
 
@@ -37,7 +43,7 @@ public  **getAttributes** ()
 
 public  **__construct** (*string* $type, *string* $content, [*boolean* $filter], [*array* $attributes])
 
-Phalcon\\Assets\\Inline constructor
+Phalcon\Assets\Inline constructor
 
 
 

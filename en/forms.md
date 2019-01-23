@@ -1,16 +1,14 @@
-<div class='article-menu' markdown='1'>
-
-- [Flashing Messages](#overview)
-    - [Adapters](#adapters)
-    - [Usage](#usage)
-    - [Printing Messages](#printing)
-    - [Implicit Flush vs. Session](#implicit-flush-vs-session)
-
-</div>
+---
+layout: article
+language: 'en'
+version: '4.0'
+---
+##### This article reflects v3.4 and has not yet been revised
+{:.alert .alert-danger}
 
 <a name='overview'></a>
 # Forms
-`Phalcon\Forms\Form` is a component that helps with the creation and maintenance of forms in web applications.
+[Phalcon\Forms\Form](api/Phalcon_Forms_Form) is a component that helps with the creation and maintenance of forms in web applications.
 
 The following example shows its basic usage:
 
@@ -79,8 +77,6 @@ Forms can be rendered based on the form definition:
         <?php echo $form->render('telephoneType'); ?>
     </p>
 
-
-
     <p>
         <input type='submit' value='Save' />
     </p>
@@ -88,7 +84,7 @@ Forms can be rendered based on the form definition:
 </form>
 ```
 
-Each element in the form can be rendered as required by the developer. Internally, `Phalcon\Tag` is used to produce the correct HTML for each element and you can pass additional HTML attributes as the second parameter of `render()`:
+Each element in the form can be rendered as required by the developer. Internally, [Phalcon\Tag](api/Phalcon_Tag) is used to produce the correct HTML for each element and you can pass additional HTML attributes as the second parameter of `render()`:
 
 ```php
 <p>
@@ -151,15 +147,19 @@ class ContactForm extends Form
                     'using' => [
                         'id',
                         'name',
-                    ]
+                    ],
+                    'useEmpty'   => true,
+                    'emptyText'  => 'Select one...',
+                    'emptyValue' => '',
                 ]
             )
         );
     }
 }
 ```
+Additionally, the Select elements support the `useEmpty` option to enable the use of a blank element within the list of available options. The options `emptyText` and` emptyValue` are optional, which allow you to customize, respectively, the text and the value of the empty element
 
-`Phalcon\Forms\Form` extends `Phalcon\Di\Injectable` so you have access to the application services if needed:
+[Phalcon\Forms\Form](api/Phalcon_Forms_Form) extends [Phalcon\Di\Injectable](api/Phalcon_Di_Injectable) so you have access to the application services if needed:
 
 ```php
 <?php
@@ -255,8 +255,9 @@ $form = new UsersForm(
 );
 ```
 
-Validation
-Phalcon forms are integrated with the [validation](/[[language]]/[[version]]/validation) component to offer instant validation. Built-in or custom validators could be set to each element:
+<a name='validation'></a>
+## Validation
+Phalcon forms are integrated with the [validation](/4.0/en/validation) component to offer instant validation. Built-in or custom validators could be set to each element:
 
 ```php
 <?php
@@ -366,7 +367,7 @@ $email->setFilters(
 $form->add($email);
 ```
 
-<h5 class='alert alert-info' markdown='1'>Learn more about filtering in Phalcon by reading the [Filter documentation](/[[language]]/[[version]]/filter) </h5>
+<h5 class='alert alert-info' markdown='1'>Learn more about filtering in Phalcon by reading the [Filter documentation](/4.0/en/filter) </h5>
 
 <a name='entities'></a>
 ## Forms + Entities
@@ -468,8 +469,6 @@ class Preferences
 
     public $receiveEmails;
 
-
-
     public function getTimezone()
     {
         return 'Europe/Amsterdam';
@@ -484,20 +483,22 @@ class Preferences
 
 <a name='elements'></a>
 ## Form Elements
-Phalcon provides a set of built-in elements to use in your forms, all these elements are located in the `Phalcon\Forms\Element` namespace:
+Phalcon provides a set of built-in elements to use in your forms, all these elements are located in the [Phalcon\Forms\Element](api/Phalcon_Forms_Element) namespace:
 
 | Name                             | Description                                                   |
 |----------------------------------|---------------------------------------------------------------|
-| `Phalcon\Forms\Element\Text`     | Generate `INPUT[type=text]` elements                          |
-| `Phalcon\Forms\Element\Password` | Generate `INPUT[type=password]` elements                      |
-| `Phalcon\Forms\Element\Select`   | Generate `SELECT` tag (combo lists) elements based on choices |
-| `Phalcon\Forms\Element\Check`    | Generate `INPUT[type=check]` elements                         |
-| `Phalcon\Forms\Element\TextArea` | Generate `TEXTAREA` elements                                  |
-| `Phalcon\Forms\Element\Hidden`   | Generate `INPUT[type=hidden]` elements                        |
-| `Phalcon\Forms\Element\File`     | Generate `INPUT[type=file]` elements                          |
-| `Phalcon\Forms\Element\Date`     | Generate `INPUT[type=date]` elements                          |
-| `Phalcon\Forms\Element\Numeric`  | Generate `INPUT[type=number]` elements                        |
-| `Phalcon\Forms\Element\Submit`   | Generate `INPUT[type=submit]` elements                        |
+| [Phalcon\Forms\Element\Text](api/Phalcon_Forms_Element_Text)     | Generate `INPUT[type=text]` elements                          |
+| [Phalcon\Forms\Element\Password](api/Phalcon_Forms_Element_Password) | Generate `INPUT[type=password]` elements                      |
+| [Phalcon\Forms\Element\Select](api/Phalcon_Forms_Element_Select)   | Generate `SELECT` tag (combo lists) elements based on choices |
+| [Phalcon\Forms\Element\Check](api/Phalcon_Forms_Element_Check)    | Generate `INPUT[type=check]` elements                         |
+| [Phalcon\Forms\Element\TextArea](api/Phalcon_Forms_Element_TextArea) | Generate `TEXTAREA` elements                                  |
+| [Phalcon\Forms\Element\Hidden](api/Phalcon_Forms_Element_Hidden)   | Generate `INPUT[type=hidden]` elements                        |
+| [Phalcon\Forms\Element\File](api/Phalcon_Forms_Element_File)     | Generate `INPUT[type=file]` elements                          |
+| [Phalcon\Forms\Element\Date](api/Phalcon_Forms_Element_Date)     | Generate `INPUT[type=date]` elements                          |
+| [Phalcon\Forms\Element\Numeric](api/Phalcon_Forms_Element_Numeric)  | Generate `INPUT[type=number]` elements                        |
+| [Phalcon\Forms\Element\Submit](api/Phalcon_Forms_Element_Submit)   | Generate `INPUT[type=submit]` elements                        |
+| [Phalcon\Forms\Element\Text](api/Phalcon_Forms_Element_Text)     | Generate `INPUT[type=text]` elements                          |
+| [Phalcon\Forms\Element\TextArea](api/Phalcon_Forms_Element_TextArea) | Generate `TEXTAREA` elements                                  |
 
 <a name='event-callback'></a>
 ## Event Callbacks
@@ -635,6 +636,7 @@ class MyElement extends Element
 }
 ```
 
+<a name='manager'></a>
 ## Forms Manager
 This component provides a forms manager that can be used by the developer to register forms and access them via the service locator:
 
@@ -669,5 +671,6 @@ $loginForm = $this->forms->get('login');
 echo $loginForm->render();
 ```
 
+<a name='external'></a>
 ## External Resources
-* [Vökuró](http://vokuro.phalconphp.com), is a sample application that uses the forms builder to create and manage forms, [[Github](https://github.com/phalcon/vokuro)]
+* [Vökuró](https://vokuro.phalconphp.com), is a sample application that uses the forms builder to create and manage forms, [[GitHub](https://github.com/phalcon/vokuro)]

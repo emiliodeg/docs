@@ -1,12 +1,18 @@
-# Class **Phalcon\\Mvc\\Model\\Transaction**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Mvc\Model\Transaction'
+---
+# Class **Phalcon\Mvc\Model\Transaction**
 
-*implements* [Phalcon\Mvc\Model\TransactionInterface](/en/3.2/api/Phalcon_Mvc_Model_TransactionInterface)
+*implements* [Phalcon\Mvc\Model\TransactionInterface](Phalcon_Mvc_Model_TransactionInterface)
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/mvc/model/transaction.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/mvc/model/transaction.zep)
 
 Transactions are protective blocks where SQL statements are only permanent if they can
-all succeed as one atomic action. Phalcon\\Transaction is intended to be used with Phalcon_Model_Base.
-Phalcon Transactions should be created using Phalcon\\Transaction\\Manager.
+all succeed as one atomic action. Phalcon\Transaction is intended to be used with Phalcon_Model_Base.
+Phalcon Transactions should be created using Phalcon\Transaction\Manager.
 
 ```php
 <?php
@@ -46,13 +52,13 @@ try {
 
 
 ## Methods
-public  **__construct** ([Phalcon\DiInterface](/en/3.2/api/Phalcon_DiInterface) $dependencyInjector, [*boolean* $autoBegin], [*string* $service])
+public  **__construct** ([Phalcon\DiInterface](Phalcon_DiInterface) $dependencyInjector, [*boolean* $autoBegin], [*string* $service])
 
-Phalcon\\Mvc\\Model\\Transaction constructor
+Phalcon\Mvc\Model\Transaction constructor
 
 
 
-public  **setTransactionManager** ([Phalcon\Mvc\Model\Transaction\ManagerInterface](/en/3.2/api/Phalcon_Mvc_Model_Transaction_ManagerInterface) $manager)
+public  **setTransactionManager** ([Phalcon\Mvc\Model\Transaction\ManagerInterface](Phalcon_Mvc_Model_Transaction_ManagerInterface) $manager)
 
 Sets transaction manager related to the transaction
 
@@ -70,7 +76,7 @@ Commits the transaction
 
 
 
-public *boolean* **rollback** ([*string* $rollbackMessage], [[Phalcon\Mvc\ModelInterface](/en/3.2/api/Phalcon_Mvc_ModelInterface) $rollbackRecord])
+public *boolean* **rollback** ([*string* $rollbackMessage], [[Phalcon\Mvc\ModelInterface](Phalcon_Mvc_ModelInterface) $rollbackRecord])
 
 Rollbacks the transaction
 
@@ -112,7 +118,7 @@ Checks whether internal connection is under an active transaction
 
 
 
-public  **setRollbackedRecord** ([Phalcon\Mvc\ModelInterface](/en/3.2/api/Phalcon_Mvc_ModelInterface) $record)
+public  **setRollbackedRecord** ([Phalcon\Mvc\ModelInterface](Phalcon_Mvc_ModelInterface) $record)
 
 Sets object which generates rollback action
 

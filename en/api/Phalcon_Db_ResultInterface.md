@@ -1,6 +1,12 @@
-# Interface **Phalcon\\Db\\ResultInterface**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Db\ResultInterface'
+---
+# Interface **Phalcon\Db\ResultInterface**
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/db/resultinterface.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/db/resultinterface.zep)
 
 ## Methods
 abstract public  **execute** ()

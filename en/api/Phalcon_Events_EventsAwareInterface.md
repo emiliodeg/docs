@@ -1,9 +1,15 @@
-# Interface **Phalcon\\Events\\EventsAwareInterface**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Events\EventsAwareInterface'
+---
+# Interface **Phalcon\Events\EventsAwareInterface**
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/events/eventsawareinterface.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/events/eventsawareinterface.zep)
 
 ## Methods
-abstract public  **setEventsManager** ([Phalcon\Events\ManagerInterface](/en/3.2/api/Phalcon_Events_ManagerInterface) $eventsManager)
+abstract public  **setEventsManager** ([Phalcon\Events\ManagerInterface](Phalcon_Events_ManagerInterface) $eventsManager)
 
 ...
 

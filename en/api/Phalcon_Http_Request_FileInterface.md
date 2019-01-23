@@ -1,6 +1,12 @@
-# Interface **Phalcon\\Http\\Request\\FileInterface**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Http\Request\FileInterface'
+---
+# Interface **Phalcon\Http\Request\FileInterface**
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/http/request/fileinterface.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/http/request/fileinterface.zep)
 
 ## Methods
 abstract public  **getSize** ()

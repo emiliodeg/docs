@@ -1,8 +1,14 @@
-# Class **Phalcon\\Validation\\Message**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Validation\Message'
+---
+# Class **Phalcon\Validation\Message**
 
-*implements* [Phalcon\Validation\MessageInterface](/en/3.2/api/Phalcon_Validation_MessageInterface)
+*implements* [Phalcon\Validation\MessageInterface](Phalcon_Validation_MessageInterface)
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/validation/message.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/validation/message.zep)
 
 Encapsulates validation info generated in the validation process
 
@@ -10,7 +16,7 @@ Encapsulates validation info generated in the validation process
 ## Methods
 public  **__construct** (*mixed* $message, [*mixed* $field], [*mixed* $type], [*mixed* $code])
 
-Phalcon\\Validation\\Message constructor
+Phalcon\Validation\Message constructor
 
 
 

@@ -1,6 +1,12 @@
-# Interface **Phalcon\\Di\\ServiceInterface**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Di\ServiceInterface'
+---
+# Interface **Phalcon\Di\ServiceInterface**
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/di/serviceinterface.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/di/serviceinterface.zep)
 
 ## Methods
 abstract public  **getName** ()
@@ -28,7 +34,7 @@ abstract public  **getDefinition** ()
 ...
 
 
-abstract public  **resolve** ([*mixed* $parameters], [[Phalcon\DiInterface](/en/3.2/api/Phalcon_DiInterface) $dependencyInjector])
+abstract public  **resolve** ([*mixed* $parameters], [[Phalcon\DiInterface](Phalcon_DiInterface) $dependencyInjector])
 
 ...
 

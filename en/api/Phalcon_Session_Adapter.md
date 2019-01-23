@@ -1,10 +1,16 @@
-# Abstract class **Phalcon\\Session\\Adapter**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Session\Adapter'
+---
+# Abstract class **Phalcon\Session\Adapter**
 
-*implements* [Phalcon\Session\AdapterInterface](/en/3.2/api/Phalcon_Session_AdapterInterface)
+*implements* [Phalcon\Session\AdapterInterface](Phalcon_Session_AdapterInterface)
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/session/adapter.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/session/adapter.zep)
 
-Base class for Phalcon\\Session adapters
+Base class for Phalcon\Session adapters
 
 
 ## Constants
@@ -17,7 +23,7 @@ Base class for Phalcon\\Session adapters
 ## Methods
 public  **__construct** ([*array* $options])
 
-Phalcon\\Session\\Adapter constructor
+Phalcon\Session\Adapter constructor
 
 
 

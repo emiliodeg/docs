@@ -1,8 +1,14 @@
-# Abstract class **Phalcon\\Tag\\Select**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Tag\Select'
+---
+# Abstract class **Phalcon\Tag\Select**
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/tag/select.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/tag/select.zep)
 
-Generates a SELECT html tag using a static array of values or a Phalcon\\Mvc\\Model resultset
+Generates a SELECT html tag using a static array of values or a Phalcon\Mvc\Model resultset
 
 
 ## Methods
@@ -12,7 +18,7 @@ Generates a SELECT tag
 
 
 
-private static  **_optionsFromResultset** ([Phalcon\Mvc\Model\Resultset](/en/3.2/api/Phalcon_Mvc_Model_Resultset) $resultset, *array* $using, *mixed* $value, *string* $closeOption)
+private static  **_optionsFromResultset** ([Phalcon\Mvc\Model\Resultset](Phalcon_Mvc_Model_Resultset) $resultset, *array* $using, *mixed* $value, *string* $closeOption)
 
 Generate the OPTION tags based on a resultset
 

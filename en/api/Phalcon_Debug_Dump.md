@@ -1,6 +1,12 @@
-# Class **Phalcon\\Debug\\Dump**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Debug\Dump'
+---
+# Class **Phalcon\Debug\Dump**
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/debug/dump.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/debug/dump.zep)
 
 Dumps information about a variable(s)
 
@@ -38,7 +44,7 @@ public  **setDetailed** (*mixed* $detailed)
 
 public  **__construct** ([*array* $styles], [*mixed* $detailed])
 
-Phalcon\\Debug\\Dump constructor
+Phalcon\Debug\Dump constructor
 
 
 

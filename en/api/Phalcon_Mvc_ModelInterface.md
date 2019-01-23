@@ -1,9 +1,15 @@
-# Interface **Phalcon\\Mvc\\ModelInterface**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Mvc\ModelInterface'
+---
+# Interface **Phalcon\Mvc\ModelInterface**
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/mvc/modelinterface.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/mvc/modelinterface.zep)
 
 ## Methods
-abstract public  **setTransaction** ([Phalcon\Mvc\Model\TransactionInterface](/en/3.2/api/Phalcon_Mvc_Model_TransactionInterface) $transaction)
+abstract public  **setTransaction** ([Phalcon\Mvc\Model\TransactionInterface](Phalcon_Mvc_Model_TransactionInterface) $transaction)
 
 ...
 
@@ -73,7 +79,7 @@ abstract public static  **cloneResultMap** (*mixed* $base, *array* $data, *mixed
 ...
 
 
-abstract public static  **cloneResult** ([Phalcon\Mvc\ModelInterface](/en/3.2/api/Phalcon_Mvc_ModelInterface) $base, *array* $data, [*mixed* $dirtyState])
+abstract public static  **cloneResult** ([Phalcon\Mvc\ModelInterface](Phalcon_Mvc_ModelInterface) $base, *array* $data, [*mixed* $dirtyState])
 
 ...
 
@@ -93,7 +99,7 @@ abstract public static  **findFirst** ([*mixed* $parameters])
 ...
 
 
-abstract public static  **query** ([[Phalcon\DiInterface](/en/3.2/api/Phalcon_DiInterface) $dependencyInjector])
+abstract public static  **query** ([[Phalcon\DiInterface](Phalcon_DiInterface) $dependencyInjector])
 
 ...
 
@@ -133,7 +139,7 @@ abstract public  **fireEventCancel** (*mixed* $eventName)
 ...
 
 
-abstract public  **appendMessage** ([Phalcon\Mvc\Model\MessageInterface](/en/3.2/api/Phalcon_Mvc_Model_MessageInterface) $message)
+abstract public  **appendMessage** ([Phalcon\Mvc\Model\MessageInterface](Phalcon_Mvc_Model_MessageInterface) $message)
 
 ...
 

@@ -1,41 +1,10 @@
-<div class='article-menu' markdown='1'>
-
-- [Overview](#overview)
-    - [Requirements](#requirements)
-    - [Packages Included](#packages-included)
-    - [Installation](#installation)
-        - [Installing the Vagrant Box](#installation-vagrant-box)
-        - [Installing the Phalcon Box](#installation-phalcon-box)
-    - [Configuring](#installation-configuration)
-        - [Setting your provider](#installation-configuration-setting-provider)
-        - [Memory and CPU](#installation-configuration-memory-cpu)
-        - [Shared folders](#installation-configuration-shared-folders)
-        - [Nginx sites](#installation-configuration-nginx)
-            - [Custom Nginx configuration](#installation-configuration-custom-nginx)
-            - [Configuring the `hosts` file](#installation-configuration-hosts)
-        - [Install additional packages](#installation-aditional-packages)
-        - [Launching the Phalcon Box](#installation-launching-phalcon-box)
-    - [Daily usage](#daily-usage)
-        - [Accessing Phalcon Box globally](#daily-usage-accessing-box-globally)
-            - [Mac || Linux](#daily-usage-accessing-box-globally-mac-linux)
-            - [Windows](#daily-usage-accessing-box-globally-windows)
-        - [Connecting via SSH](#daily-usage-ssh)
-        - [Connecting to databases](#daily-usage-databases)
-        - [Adding additional sites](#daily-usage-additional-sites)
-        - [Environment variables](#daily-usage-environment-variables)
-            - [Global variables](#daily-usage-environment-global-variables)
-            - [Site variables](#daily-usage-environment-site-variables)
-        - [Ports](#daily-usage-ports)
-            - [Forwarding additional ports](#daily-usage-ports-forwarding)
-        - [Sharing your environment](#daily-usage-sharing-environment)
-        - [Network interfaces](#daily-usage-network-interfaces)
-        - [Updating Phalcon Box](#daily-usage-updating-box)
-        - [Provider specific settings](#daily-usage-provider-settings)
-            - [VirtualBox](#daily-usage-provider-settings-virtualbox)
-        - [Mail catcher](#daily-usage-mail-catcher)
-    - [Troubleshooting](#troubleshooting)
-
-</div>
+---
+layout: article
+language: 'en'
+version: '4.0'
+---
+##### This article reflects v3.4 and has not yet been revised
+{:.alert .alert-danger}
 
 <a name='overview'></a>
 # Overview
@@ -47,8 +16,8 @@ The first time that you provision a new environment with `vagrant up`, the proce
 ## Requirements
 * Operating System: Windows, Linux, or macOS
 * [Virtualbox](https://www.virtualbox.org/wiki/Downloads) >= 5.1 (if you want to build the VirtualBox box)
-* [VMware Fusion](http://www.vmware.com/products/fusion) (or Workstation - if you want to build the VMware box)
-* [Vagrant](https://www.vagrantup.com/downloads.html) >= 1.9
+* [VMware Fusion](https://www.vmware.com/products/fusion) (or Workstation - if you want to build the VMware box)
+* [Vagrant](https://www.vagrantup.com/downloads.html) >= 1.9.8
 
 <a name='packages-included'></a>
 ## Packages Included
@@ -104,7 +73,7 @@ git clone https://github.com/phalcon/box.git workspace
 
 The `master` branch will always contain the latest stable version of Phalcon Box. If you wish to check older versions or newer ones currently under development, please switch to the relevant branch/tag.
 
-You can find the latest stable version on the [Github Release Page](https://github.com/phalcon/box/releases):
+You can find the latest stable version on the [GitHub Release Page](https://github.com/phalcon/box/releases):
 
 ```bash
 # Clone the desired release...
@@ -269,7 +238,7 @@ You must add the "domains" for your Nginx sites to the hosts file on your machin
 Make sure the IP address listed is the one set in your `settings.yml` file. Once you have added the domain to your `hosts` file and launched the Vagrant box you will be able to access the site via your web browser:
 
 ```
-http://phalcon.local
+https://phalcon.local
 ```
 
 <h5 class='alert alert-danger' markdown='1'>To enable adding new sites to the `hosts` file automatically use `vagrant-hostsupdater` plugin: </h5>
@@ -307,7 +276,7 @@ To destroy the machine, you may use the `vagrant destroy --force` command.
 ## Daily usage
 <a name='daily-usage-accessing-box-globally'></a>
 ### Accessing Phalcon Box globally
-Sometimes you may want to `vagrant up` your Phalcon Box machine from anywhere on your filesystem. You can do this on Mac or Linux systems by adding a [Bash function](http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO-8.html) to your Bash profile. On Windows, you may accomplish this by adding a "batch" file to your `PATH`. These scripts will allow you to run any Vagrant command from anywhere on your system and will automatically point that command to your Phalcon Box installation:
+Sometimes you may want to `vagrant up` your Phalcon Box machine from anywhere on your filesystem. You can do this on Mac or Linux systems by adding a [Bash function](https://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO-8.html) to your Bash profile. On Windows, you may accomplish this by adding a "batch" file to your `PATH`. These scripts will allow you to run any Vagrant command from anywhere on your system and will automatically point that command to your Phalcon Box installation:
 
 <a name='daily-usage-accessing-box-globally-mac-linux'></a>
 #### Mac || Linux
@@ -406,7 +375,7 @@ variables:
       value: "mysql:host=127.0.0.1;dbname=phalcon_test"
 ```
 
-This way you will be able to use these variables in your applications or scripts. For example when configuring [Codeception](http://codeception.com) in such way:
+This way you will be able to use these variables in your applications or scripts. For example when configuring [Codeception](https://codeception.com) in such way:
 
 ```yaml
 # File codeception.yml
@@ -468,6 +437,8 @@ If you wish, you may forward additional ports to the Phalcon Box, as well as spe
 
 ```yaml
 ports:
+    - send: 63790
+      to: 6379
     - send: 50000
       to: 5000
     - send: 7777
@@ -555,7 +526,7 @@ natdnshostresolver: off
 
 <a name='daily-usage-mail-catcher'></a>
 ### Mail catcher
-By default, Phalcon Box redirects all PHP emails to [MailHog](https://github.com/mailhog/MailHog) (instead of sending them to the outside world). You can access the MailHog UI at `http://localhost:8025/` (or whatever domain you have configured in `settings.yml`).
+By default, Phalcon Box redirects all PHP emails to [MailHog](https://github.com/mailhog/MailHog) (instead of sending them to the outside world). You can access the MailHog UI at `https://localhost:8025/` (or whatever domain you have configured in `settings.yml`).
 
 <a name='troubleshooting'></a>
 ## Troubleshooting

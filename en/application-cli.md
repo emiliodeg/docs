@@ -1,13 +1,10 @@
-<div class='article-menu' markdown='1'>
-
-- [Creating a CLI Application](#creating-cli-application)
-    - [Structure](#structure)
-    - [Creating a Bootstrap](#creating-bootstrap)
-    - [Tasks](#tasks)
-    - [Processing action parameters](#processing-action-parameters)
-    - [Running tasks in a chain](#running-tasks-chain)
-
-</div>
+---
+layout: article
+language: 'en'
+version: '4.0'
+---
+##### This article reflects v3.4 and has not yet been revised
+{:.alert .alert-danger}
 
 <a name='creating-cli-application'></a>
 # Creating a Command Line (CLI) Application
@@ -224,4 +221,4 @@ class MainTask extends Task
 }
 ```
 
-However, it's a better idea to extend `Phalcon\Cli\Task` and implement this kind of logic there.
+However, it's a better idea to extend [Phalcon\Cli\Task](api/Phalcon_Cli_Task) and implement this kind of logic there.

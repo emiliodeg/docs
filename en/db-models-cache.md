@@ -1,16 +1,10 @@
-<div class='article-menu' markdown='1'>
-
-- [ORM Caching](#overview)
-    - [Caching Resultsets](#caching-resultsets)
-    - [Forcing Cache](#forcing-cache)
-    - [Caching PHQL Queries](#caching-phql-queries)
-    - [Reusable Related Records](#reusable-related-records)
-    - [Caching Related Records](#caching-related-records)
-    - [Caching Related Records Recursively](#caching-related-records-recursively)
-    - [Caching based on Conditions](#caching-based-on-conditions)
-    - [Caching PHQL execution plan](#caching-phql-execution-plan)
-
-</div>
+---
+layout: article
+language: 'en'
+version: '4.0'
+---
+##### This article reflects v3.4 and has not yet been revised
+{:.alert .alert-danger}
 
 <a name='orm-caching'></a>
 # ORM Caching
@@ -22,7 +16,7 @@ This chapter explains the potential areas where it is possible to implement cach
 ## Caching Resultsets
 A well established technique to avoid continuously accessing the database, is to cache resultsets that don't change frequently, using a system with faster access (usually memory).
 
-When `Phalcon\Mvc\Model` requires a service to cache resultsets, it will request it from the Dependency Injection Container. The service name is called `modelsCache`. Phalcon offers a [cache](/[[language]]/[[version]]/cache) component that can store any kind of data. We will now see how we can integrate it with our Models.
+When [Phalcon\Mvc\Model](api/Phalcon_Mvc_Model) requires a service to cache resultsets, it will request it from the Dependency Injection Container. The service name is called `modelsCache`. Phalcon offers a [cache](/4.0/en/cache) component that can store any kind of data. We will now see how we can integrate it with our Models.
 
 First, we will need to register the cache component as a service in the DI container.
 ```php
@@ -128,7 +122,7 @@ Which resultset to cache and for how long is up to the developer, after having e
 
 <a name='forcing-cache'></a>
 ## Forcing Cache
-Earlier we saw how `Phalcon\Mvc\Model` integrates with the caching component provided by the framework. To make a record/resultset cacheable we pass the key `cache` in the array of parameters:
+Earlier we saw how [Phalcon\Mvc\Model](api/Phalcon_Mvc_Model) integrates with the caching component provided by the framework. To make a record/resultset cacheable we pass the key `cache` in the array of parameters:
 
 ```php
 <?php
@@ -543,13 +537,25 @@ class CustomQueryBuilder extends QueryBuilder
         $query = new CustomQuery($this->getPhql());
 
         $query->setDI($this->getDI());
+        
+        if ( is_array($this->_bindParams) ) {
+            $query->setBindParams($this->_bindParams);
+        }
+
+        if ( is_array($this->_bindTypes) ) {
+            $query->setBindTypes($this->_bindTypes);
+        }
+
+        if ( is_array($this->_sharedLock) ) {
+            $query->setSharedLock($this->_sharedLock);
+        }
 
         return $query;
     }
 }
 ```
 
-Instead of directly returning a `Phalcon\Mvc\Model\Query`, our custom builder returns a CustomQuery instance, this class looks like:
+Instead of directly returning a [Phalcon\Mvc\Model\Query](api/Phalcon_Mvc_Model_Query), our custom builder returns a CustomQuery instance, this class looks like:
 
 ```php
 <?php
@@ -565,6 +571,14 @@ class CustomQuery extends ModelQuery
     {
         // Parse the intermediate representation for the SELECT
         $ir = $this->parse();
+
+        if ( is_array($this->_bindParams) ) {
+            $params = array_merge($this->_bindParams, (array)$params);
+        }
+
+        if ( is_array($this->_bindTypes) ) {
+            $types = array_merge($this->_bindTypes, (array)$types);
+        }
 
         // Check if the query has conditions
         if (isset($ir['where'])) {
@@ -588,6 +602,7 @@ class CustomQuery extends ModelQuery
 
         // Execute the query
         $result = $this->_executeSelect($ir, $params, $types);
+        $result = $this->_uniqueRow ? $result->getFirst() : $result;
 
         // Cache the result
         // ...
@@ -756,4 +771,4 @@ for ($i = 1; $i <= 10; $i++) {
 }
 ```
 
-Execution plans for queries involving [prepared statements](http://en.wikipedia.org/wiki/Prepared_statement) are also cached by most database systems reducing the overall execution time, also protecting your application against [SQL Injections](http://en.wikipedia.org/wiki/SQL_injection).
+Execution plans for queries involving [prepared statements](https://en.wikipedia.org/wiki/Prepared_statement) are also cached by most database systems reducing the overall execution time, also protecting your application against [SQL Injections](https://en.wikipedia.org/wiki/SQL_injection).

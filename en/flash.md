@@ -1,12 +1,10 @@
-<div class='article-menu' markdown='1'>
-
-- [Flashing Messages](#overview)
-    - [Adapters](#adapters)
-    - [Usage](#usage)
-    - [Printing Messages](#printing)
-    - [Implicit Flush vs. Session](#implicit-flush-vs-session)
-
-</div>
+---
+layout: article
+language: 'en'
+version: '4.0'
+---
+##### This article reflects v3.4 and has not yet been revised
+{:.alert .alert-danger}
 
 <a name='overview'></a>
 # Flashing Messages
@@ -18,12 +16,12 @@ This component makes use of adapters to define the behavior of the messages afte
 
 | Adapter | Description                                                                                  | API                     |
 |---------|----------------------------------------------------------------------------------------------|-------------------------|
-| Direct  | Directly outputs the messages passed to the flasher                                          | `Phalcon\Flash\Direct`  |
-| Session | Temporarily stores the messages in session, then messages can be printed in the next request | `Phalcon\Flash\Session` |
+| Direct  | Directly outputs the messages passed to the flasher                                          | [Phalcon\Flash\Direct](api/Phalcon_Flash_Direct)  |
+| Session | Temporarily stores the messages in session, then messages can be printed in the next request | [Phalcon\Flash\Session](api/Phalcon_Flash_Session) |
 
 <a name='usage'></a>
 ## Usage
-Usually the Flash Messaging service is requested from the services container. If you're using `Phalcon\Di\FactoryDefault` then `Phalcon\Flash\Direct` is automatically registered as `flash` service and `Phalcon\Flash\Session` is automatically registered as `flashSession` service. You can also manually register it:
+Usually the Flash Messaging service is requested from the services container. If you're using [Phalcon\Di\FactoryDefault](api/Phalcon_Di_FactoryDefault) then [Phalcon\Flash\Direct](api/Phalcon_Flash_Direct) is automatically registered as `flash` service and [Phalcon\Flash\Session](api/Phalcon_Flash_Session) is automatically registered as `flashSession` service. You can also manually register it:
 
 ```php
 <?php
@@ -210,4 +208,4 @@ In this case you need to manually print the messages in the corresponding view:
 <p><?php $this->flashSession->output() ?></p>
 ```
 
-The attribute `flashSession` is how the flash was previously set into the dependency injection container. You need to start the [session](/[[language]]/[[version]]/session) first to successfully use the `flashSession` messenger.
+The attribute `flashSession` is how the flash was previously set into the dependency injection container. You need to start the [session](/4.0/en/session) first to successfully use the `flashSession` messenger.

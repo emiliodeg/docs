@@ -1,11 +1,17 @@
-# Class **Phalcon\\Mvc\\Model\\Criteria**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Mvc\Model\Criteria'
+---
+# Class **Phalcon\Mvc\Model\Criteria**
 
-*implements* [Phalcon\Mvc\Model\CriteriaInterface](/en/3.2/api/Phalcon_Mvc_Model_CriteriaInterface), [Phalcon\Di\InjectionAwareInterface](/en/3.2/api/Phalcon_Di_InjectionAwareInterface)
+*implements* [Phalcon\Mvc\Model\CriteriaInterface](Phalcon_Mvc_Model_CriteriaInterface), [Phalcon\Di\InjectionAwareInterface](Phalcon_Di_InjectionAwareInterface)
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/mvc/model/criteria.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/mvc/model/criteria.zep)
 
 This class is used to build the array parameter required by
-Phalcon\\Mvc\\Model::find() and Phalcon\\Mvc\\Model::findFirst()
+Phalcon\Mvc\Model::find() and Phalcon\Mvc\Model::findFirst()
 using an object-oriented interface.
 
 ```php
@@ -23,7 +29,7 @@ $robots = Robots::query()
 
 
 ## Methods
-public  **setDI** ([Phalcon\DiInterface](/en/3.2/api/Phalcon_DiInterface) $dependencyInjector)
+public  **setDI** ([Phalcon\DiInterface](Phalcon_DiInterface) $dependencyInjector)
 
 Sets the DependencyInjector container
 
@@ -67,7 +73,7 @@ Sets SELECT DISTINCT / SELECT ALL flag
 
 
 
-public [Phalcon\Mvc\Model\Criteria](/en/3.2/api/Phalcon_Mvc_Model_Criteria) **columns** (*string* | *array* $columns)
+public [Phalcon\Mvc\Model\Criteria](Phalcon_Mvc_Model_Criteria) **columns** (*string* | *array* $columns)
 
 Sets the columns to be queried
 
@@ -333,9 +339,9 @@ Returns all the parameters defined in the criteria
 
 
 
-public static  **fromInput** ([Phalcon\DiInterface](/en/3.2/api/Phalcon_DiInterface) $dependencyInjector, *mixed* $modelName, *array* $data, [*mixed* $operator])
+public static  **fromInput** ([Phalcon\DiInterface](Phalcon_DiInterface) $dependencyInjector, *mixed* $modelName, *array* $data, [*mixed* $operator])
 
-Builds a Phalcon\\Mvc\\Model\\Criteria based on an input array like $_POST
+Builds a Phalcon\Mvc\Model\Criteria based on an input array like $_POST
 
 
 

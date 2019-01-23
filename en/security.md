@@ -1,13 +1,10 @@
-<div class='article-menu' markdown='1'>
-
-- [Security](#overview)
-    - [Password Hashing](#hashing)
-    - [Cross-Site Request Forgery (CSRF) protection](#csrf)
-    - [Setting up the component](#setup)
-    - [Random](#random)
-    - [External Resources](#resources)
-
-</div>
+---
+layout: article
+language: 'en'
+version: '4.0'
+---
+##### This article reflects v3.4 and has not yet been revised
+{:.alert .alert-danger}
 
 <a name='overview'></a>
 # Security
@@ -15,11 +12,15 @@ This component aids the developer in common security tasks such as password hash
 
 <a name='hashing'></a>
 ## Password Hashing
-Storing passwords in plain text is a bad security practice. Anyone with access to the database will immediately have access to all user accounts thus being able to engage in unauthorized activities. To combat that, many applications use the familiar one way hashing methods '[md5](http://php.net/manual/en/function.md5.php)' and '[sha1](http://php.net/manual/en/function.sha1.php)'. However, hardware evolves each day, and becomes faster, these algorithms are becoming vulnerable to brute force attacks. These attacks are also known as [rainbow tables](http://en.wikipedia.org/wiki/Rainbow_table).
+Storing passwords in plain text is a bad security practice. Anyone with access to the database will immediately have access to all user accounts thus being able to engage in unauthorized activities. To combat that, many applications use the familiar one way hashing methods '[md5](https://php.net/manual/en/function.md5.php)' and '[sha1](https://php.net/manual/en/function.sha1.php)'. However, hardware evolves each day, and becomes faster, these algorithms are becoming vulnerable to brute force attacks. These attacks are also known as [rainbow tables](https://en.wikipedia.org/wiki/Rainbow_table).
 
-To solve this problem we can use hash algorithms as [bcrypt](http://en.wikipedia.org/wiki/Bcrypt). Why bcrypt? Thanks to its '[Eksblowfish](http://en.wikipedia.org/wiki/Bcrypt#Algorithm)' key setup algorithm we can make the password encryption as 'slow' as we want. Slow algorithms make the process to calculate the real password behind a hash extremely difficult if not impossible. This will protect your for a long time from a possible attack using rainbow tables.
+The security component uses [bcrypt](https://en.wikipedia.org/wiki/Bcrypt) as the hashing algorithm. Thanks to the '[Eksblowfish](https://en.wikipedia.org/wiki/Bcrypt#Algorithm)' key setup algorithm, we can make the password encryption as `slow` as we want. Slow algorithms minimize the impact of bruce force attacks. 
 
-This component gives you the ability to use this algorithm in a simple way:
+Bcrypt, is an adaptive hash function based on the Blowfish symmetric block cipher cryptographic algorithm. It also introduces a security or work factor, which determines how slow the hash function will be to generate the hash. This effectively negates the use of FPGA or GPU hashing techniques.
+
+Should hardware becomes faster in the future, we can increase the work factor to mitigate this.
+
+This component offers a simple interface to use the algorithm:
 
 ```php
 <?php
@@ -76,13 +77,13 @@ class SessionController extends Controller
 }
 ```
 
-The salt is generated using pseudo-random bytes with the PHP's function [openssl_random_pseudo_bytes](http://php.net/manual/en/function.openssl-random-pseudo-bytes.php) so is required to have the [openssl](http://php.net/manual/en/book.openssl.php) extension loaded.
+The salt is generated using pseudo-random bytes with the PHP's function [openssl_random_pseudo_bytes](https://php.net/manual/en/function.openssl-random-pseudo-bytes.php) so is required to have the [openssl](https://php.net/manual/en/book.openssl.php) extension loaded.
 
 <a name='csrf'></a>
 ## Cross-Site Request Forgery (CSRF) protection
 This is another common attack against web sites and applications. Forms designed to perform tasks such as user registration or adding comments are vulnerable to this attack.
 
-The idea is to prevent the form values from being sent outside our application. To fix this, we generate a [random nonce](http://en.wikipedia.org/wiki/Cryptographic_nonce) (token) in each form, add the token in the session and then validate the token once the form posts data back to our application by comparing the stored token in the session to the one submitted by the form:
+The idea is to prevent the form values from being sent outside our application. To fix this, we generate a [random nonce](https://en.wikipedia.org/wiki/Cryptographic_nonce) (token) in each form, add the token in the session and then validate the token once the form posts data back to our application by comparing the stored token in the session to the one submitted by the form:
 
 ```php
 <?php echo Tag::form('session/login') ?>
@@ -132,7 +133,7 @@ $di->setShared(
 );
 ```
 
-Adding a [captcha](http://www.google.com/recaptcha) to the form is also recommended to completely avoid the risks of this attack.
+Adding a [captcha](https://www.google.com/recaptcha) to the form is also recommended to completely avoid the risks of this attack.
 
 <a name='setup'></a>
 ## Setting up the component
@@ -159,7 +160,7 @@ $di->set(
 
 <a name='random'></a>
 ## Random
-The `Phalcon\Security\Random` class makes it really easy to generate lots of types of random data.
+The [Phalcon\Security\Random](api/Phalcon_Security_Random) class makes it really easy to generate lots of types of random data.
 
 ```php
 <?php
@@ -190,6 +191,6 @@ $number     = $random->number($n);
 
 <a name='resources'></a>
 ## External Resources
-* [Vökuró](https://vokuro.phalconphp.com), is a sample application that uses the Security component for avoid CSRF and password hashing, [Github](https://github.com/phalcon/vokuro)
+* [Vökuró](https://vokuro.phalconphp.com), is a sample application that uses the Security component for avoid CSRF and password hashing, [GitHub](https://github.com/phalcon/vokuro)
 
 [wiki-csrf]: https://en.wikipedia.org/wiki/Cross-site_request_forgery

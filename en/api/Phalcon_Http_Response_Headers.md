@@ -1,8 +1,14 @@
-# Class **Phalcon\\Http\\Response\\Headers**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Http\Response\Headers'
+---
+# Class **Phalcon\Http\Response\Headers**
 
-*implements* [Phalcon\Http\Response\HeadersInterface](/en/3.2/api/Phalcon_Http_Response_HeadersInterface)
+*implements* [Phalcon\Http\Response\HeadersInterface](Phalcon_Http_Response_HeadersInterface)
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/http/response/headers.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/http/response/headers.zep)
 
 This class is a bag to manage the response headers
 
@@ -52,7 +58,7 @@ Returns the current headers as an array
 
 public static  **__set_state** (*array* $data)
 
-Restore a \\Phalcon\\Http\\Response\\Headers object
+Restore a \Phalcon\Http\Response\Headers object
 
 
 

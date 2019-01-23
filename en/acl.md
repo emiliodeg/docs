@@ -1,29 +1,43 @@
-<div class='article-menu' markdown='1'>
-
-- [Access Control Lists](#overview)
-    - [Creating an ACL](#setup)
-    - [Adding Roles to the ACL](#adding-roles)
-    - [Adding Resources](#adding-resources)
-    - [Defining Access Controls](#access-controls)
-    - [Querying an ACL](#querying)
-    - [Function based access](#function-based-access)
-    - [Objects as role name and resource name](#objects)
-    - [Roles Inheritance](#roles-inheritance)
-    - [Serializing ACL lists](#serialization)
-    - [Events](#events)
-    - [Implementing your own adapters](#custom-adapters)
-
-</div>
-
+---
+layout: article
+language: 'en'
+version: '4.0'
+---
 <a name='overview'></a>
 # Access Control Lists (ACL)
-`Phalcon\Acl` provides an easy and lightweight management of ACLs as well as the permissions attached to them. [Access Control Lists](http://en.wikipedia.org/wiki/Access_control_list) (ACL) allow an application to control access to its areas and the underlying objects from requests. You are encouraged to read more about the ACL methodology so as to be familiar with its concepts.
+[Phalcon\Acl](api/Phalcon_Acl) provides an easy and lightweight management of ACLs as well as the permissions attached to them. [Access Control Lists](https://en.wikipedia.org/wiki/Access_control_list) (ACL) allow an application to control access to its areas and the underlying objects from requests. 
 
-In summary, ACLs have roles and resources. Resources are objects which abide by the permissions defined to them by the ACLs. Roles are objects that request access to resources and can be allowed or denied access by the ACL mechanism.
+In short, ACLs have two objects: The object that needs access, and the object that we need access to. In the programming world, these are usually referred to as Operations and Subjects. In the Phalcon world, we use the terminology [Operation](api/Phalcon_Acl_Operation) and [Subject](api/Phalcon_Acl_Subject).
+
+> **Use Case**
+>
+> An accounting application needs to have different groups of users have access to various areas of the application.
+>
+> **Operation**
+> - Administrator Access
+> - Accounting Department Access
+> - Manager Access
+> - Guest Access
+> 
+> **Subject**
+> - Login page
+> - Admin page
+> - Invoices page
+> - Reports page
+{:.alert .alert-info}
+
+As seen above in the use case, an [Operation](api/Phalcon_Acl_Operation) is defined as who needs to access a particular [Subject](api/Phalcon_Acl_Subject) i.e. an area of the application. A [Subject](api/Phalcon_Acl_Subject) is defined as the area of the application that needs to be accessed. 
+
+Using the [Phalcon\Acl](api/Phalcon_Acl) component, we can tie those two together, and strengthen the security of our application, allowing only specific operations to be bound to specific subjects.
 
 <a name='setup'></a>
 ## Creating an ACL
-This component is designed to initially work in memory. This provides ease of use and speed in accessing every aspect of the list. The `Phalcon\Acl` constructor takes as its first parameter an adapter used to retrieve the information related to the control list. An example using the memory adapter is below:
+[Phalcon\Acl](api/Phalcon_Acl) uses adapters to store and work with operations and subjects. The only adapter available right now is [Phalcon\Acl\Adapter\Memory](api/Phalcon_Acl_Adapter_Memory). Having the adapter use the memory, significantly increases the speed that the ACL is accessed but also comes with drawbacks. The main drawback is that memory is not persistent, so the developer will need to implement a storing strategy for the ACL data, so that the ACL is not generated at every request. This could easily lead to delays and unnecessary processing, especially if the ACL is quite big and/or stored in a database or file system.
+
+Phalcon also offers an easy way for developers to build their own adapters by implementing the [Phalcon\Acl\AdapterInterface](api/Phalcon_Acl_AdapterInterface) interface.
+
+### In action
+The [Phalcon\Acl](api/Phalcon_Acl) constructor takes as its first parameter an adapter used to retrieve the information related to the control list.
 
 ```php
 <?php
@@ -32,207 +46,394 @@ use Phalcon\Acl\Adapter\Memory as AclList;
 
 $acl = new AclList();
 ```
+There are two self explanatory actions that the [Phalcon\Acl](api/Phalcon_Acl) provides:
+- `Phalcon\Acl::ALLOW` 
+- `Phalcon\Acl::DENY` 
 
-By default `Phalcon\Acl` allows access to action on resources that have not yet been defined. To increase the security level of the access list we can define a `deny` level as a default access level.
+The default action is **`Phalcon\Acl::DENY`** for any [Operation](api/Phalcon_Acl_Operation) or [Subject](api/Phalcon_Acl_Subject). This is on purpose to ensure that only the developer or application allows access to specific subjects and not the ACL component itself.
 
 ```php
 <?php
 
 use Phalcon\Acl;
+use Phalcon\Acl\Adapter\Memory as AclList;
+
+$acl = new AclList();
 
 // Default action is deny access
-$acl->setDefaultAction(
-    Acl::DENY
-);
+
+// Change it to allow
+$acl->setDefaultAction(Acl::ALLOW);
 ```
 
-<a name='adding-roles'></a>
-## Adding Roles to the ACL
-A role is an object that can or cannot access certain resources in the access list. As an example, we will define roles as groups of people in an organization. The `Phalcon\Acl\Role` class is available to create roles in a more structured way. Let's add some roles to our recently created list:
+<a name='adding-operations'></a>
+## Adding Operations
+As mentioned above, a [Phalcon\Acl\Operation](api/Phalcon_Acl_Operation) is an object that can or cannot access a set of [Subject](api/Phalcon_Acl_Subject) in the access list. 
+
+There are two ways of adding operations to our list. 
+* by using a [Phalcon\Acl\Operation](api/Phalcon_Acl_Operation) object or 
+* using a string, representing the name of the operation 
+
+To see this in action, using the example outlined above, we will add the relevant [Phalcon\Acl\Operation](api/Phalcon_Acl_Operation) objects in our list:
 
 ```php
 <?php
 
-use Phalcon\Acl\Role;
+use Phalcon\Acl;
+use Phalcon\Acl\Adapter\Memory as AclList;
+use Phalcon\Acl\Operation;
 
-// Create some roles.
-// The first parameter is the name, the second parameter is an optional description.
-$roleAdmins = new Role('Administrators', 'Super-User role');
-$roleGuests = new Role('Guests');
+$acl = new AclList();
 
-// Add 'Guests' role to ACL
-$acl->addRole($roleGuests);
+/**
+ * Create some Operations.
+ * 
+ * The first parameter is the name of the operation, 
+ * the second is an optional description
+ */
 
-// Add 'Designers' role to ACL without a Phalcon\Acl\Role
-$acl->addRole('Designers');
+$operationAdmins     = new Operation('admins', 'Administrator Access');
+$operationAccounting = new Operation('accounting', 'Accounting Department Access'); 
+
+/**
+ * Add these operations in the list 
+ */
+$acl->addOperation($operationAdmins);
+$acl->addOperation($operationAccounting);
+
+/**
+ * Add operations without creating an object first 
+ */
+$acl->addOperation('manager');
+$acl->addOperation('guest');
 ```
 
-As you can see, roles are defined directly without using an instance.
+<a name='adding-subjects'></a>
+## Adding Subjects
+A [Subject](api/Phalcon_Acl_Subject) is the area of the application where access is controlled. In a MVC application, this would be a Controller. Although not mandatory, the [Phalcon\Acl\Subject](api/Phalcon_Acl_Subject) class can be used to define subjects in the application. Also it is important to add related actions to a subject so that the ACL can understand what it should control.
 
-<a name='adding-resources'></a>
-## Adding Resources
-Resources are objects where access is controlled. Normally in MVC applications resources refer to controllers. Although this is not mandatory, the `Phalcon\Acl\Resource` class can be used in defining resources. It's important to add related actions or operations to a resource so that the ACL can understand what it should to control.
+There are two ways of adding subjects to our list. 
+* by using a [Phalcon\Acl\Subject](api/Phalcon_Acl_Subject) object or 
+* using a string, representing the name of the operation 
+
+Similar to the `addOperation`, `addSubject` requires a name for the subject and an optional description.
 
 ```php
 <?php
 
-use Phalcon\Acl\Resource;
+use Phalcon\Acl;
+use Phalcon\Acl\Adapter\Memory as AclList;
+use Phalcon\Acl\Subject;
 
-// Define the 'Customers' resource
-$customersResource = new Resource('Customers');
+$acl = new AclList();
 
-// Add 'customers' resource with a couple of operations
+/**
+ * Create some Subjects and add their respective actions in the ACL
+ */
+$admin   = new Subject('admin', 'Administration Pages');
+$reports = new Subject('reports', 'Reports Pages');
 
-$acl->addResource(
-    $customersResource,
-    'search'
-);
+/**
+ * Add the subjects to the ACL and attach them to relevant actions 
+ */
+$acl->addSubject($admin, ['dashboard', 'users']);
+$acl->addSubject($reports, ['list', 'add']);
 
-$acl->addResource(
-    $customersResource,
-    [
-        'create',
-        'update',
-    ]
-);
+/**
+ * Add subjects without creating an object first 
+ */
+$acl->addSubject('admin', ['dashboard', 'users']);
+$acl->addSubject('reports', ['list', 'add']);
 ```
 
 <a name='access-controls'></a>
 ## Defining Access Controls
-Now that we have roles and resources, it's time to define the ACL (i.e. which roles can access which resources). This part is very important especially taking into consideration your default access level `allow` or `deny`.
+After both the `Operations` and `Subjects` have been defined, we need to tie them together so that the access list can be created. This is the most important step in the operation since a small mistake here can allow access to operations for subjects that the developer does not intend to. As mentioned earlier, the default access action for [Phalcon\Acl](api/Phalcon_Acl) is `Acl::DENY`, following the [whitelist](https://en.wikipedia.org/wiki/Whitelisting) approach. 
+
+To tie `Operations` and `Subjects` together we use the `allow()` and `deny()` methods exposed by the [Phalcon\Acl\Memory](api/Phalcon_Acl_Memory) class.
 
 ```php
 <?php
 
-// Set access level for roles into resources
+use Phalcon\Acl;
+use Phalcon\Acl\Adapter\Memory as AclList;
+use Phalcon\Acl\Operation;
+use Phalcon\Acl\Subject;
 
-$acl->allow('Guests', 'Customers', 'search');
+$acl = new AclList();
 
-$acl->allow('Guests', 'Customers', 'create');
+/**
+ * Add the operations
+ */
+$acl->addOperation('manager');
+$acl->addOperation('accounting');
+$acl->addOperation('guest');
 
-$acl->deny('Guests', 'Customers', 'update');
+
+/**
+ * Add the Subjects
+ */
+$acl->addSubject('admin', ['dashboard', 'users', 'view']);
+$acl->addSubject('reports', ['list', 'add', 'view']);
+$acl->addSubject('session', ['login', 'logout']);
+
+/**
+ * Now tie them all together 
+ */
+$acl->allow('manager', 'admin', 'users');
+$acl->allow('manager', 'reports', ['list', 'add']);
+$acl->allow('*', 'session', '*');
+$acl->allow('*', '*', 'view');
+
+$acl->deny('guest', '*', 'view');
 ```
 
-The `allow()` method designates that a particular role has granted access to a particular resource. The `deny()` method does the opposite.
+What the above lines tell us:
 
+```php
+$acl->allow('manager', 'admin', 'users');
+```
+
+For the `manager` operation, allow access to the `admin` subject and `users` action. To bring this into perspective with a MVC application, the above line says that the group `manager` is allowed to access the `admin` controller and `users` action.
+
+```php
+$acl->allow('manager', 'reports', ['list', 'add']);
+```
+
+You can also pass an array as the `action` parameter when invoking the `allow()` command. The above means that for the `manager` operation, allow access to the `reports` subject and `list` and `add` actions. Again to bring this into perspective with a MVC application, the above line says that the group `manager` is allowed to access the `reports` controller and `list` and `add` actions. 
+
+```php
+$acl->allow('*', 'session', '*');
+```
+
+Wildcards can also be used to do mass matching for operations, subjects or actions. In the above example, we allow every operation to access every action in the `session` subject. This command will give access to the `manager`, `accounting` and `guest` operations, access to the `session` subject and to the `login` and `logout` actions. 
+
+```php
+$acl->allow('*', '*', 'view');
+```
+
+Similarly the above gives access to any operation, any subject that has the `view` action. In a MVC application, the above is the equivalent of allowing any group to access any controller that exposes a `viewAction`. 
+
+> Please be **VERY** careful when using the `*` wildcard. It is very easy to make a mistake and the wildcard, although it seems convenient, it may allow users to access areas of your application that they are not supposed to. The best way to be 100% sure is to write tests specifically to test the permissions and the ACL. These can be done in the `unit` test suite by instantiating the component and then checking the `isAllowed()` if it is `true` or `false`.
+>
+> [Codeception](https://codeception.com) is the chosen testing framework for Phalcon and there are plenty of tests in our github repository (`tests` folder) to offer guidance and ideas.
+{:.alert .alert-danger}
+
+```php
+$acl->deny('guest', '*', 'view');
+```
+
+For the `guest` operation, we deny access to all subjects with the `view` action. Despite the fact that the default access level is `Acl::DENY` in our example above, we specifically allowed the `view` action to all operations and subjects. This includes the `guest` operation. We want to allow the `guest` operation access only to the `session` subject and the `login` and `logout` actions, since `guests` are not logged into our application. 
+
+```php
+$acl->allow('*', '*', 'view');
+```
+
+This gives access to the `view` access to everyone, but we want the `guest` operation to be excluded from that so the following line does what we need.
+
+```php
+$acl->deny('guest', '*', 'view');
+```
 <a name='querying'></a>
 ## Querying an ACL
-Once the list has been completely defined. We can query it to check if a role has a given permission or not.
+Once the list has been defined, we can query it to check if a particular operation has access to a particular subject and action. To do so, we need to use the `isAllowed()` method.
 
 ```php
 <?php
 
-// Check whether role has access to the operations
+use Phalcon\Acl;
+use Phalcon\Acl\Adapter\Memory as AclList;
+use Phalcon\Acl\Operation;
+use Phalcon\Acl\Subject;
 
-// Returns 0
-$acl->isAllowed('Guests', 'Customers', 'edit');
+$acl = new AclList();
 
-// Returns 1
-$acl->isAllowed('Guests', 'Customers', 'search');
+/**
+ * Setup the ACL
+ */
+$acl->addOperation('manager');                   
+$acl->addOperation('accounting');                   
+$acl->addOperation('guest');                       
 
-// Returns 1
-$acl->isAllowed('Guests', 'Customers', 'create');
+
+$acl->addSubject('admin', ['dashboard', 'users', 'view']);
+$acl->addSubject('reports', ['list', 'add', 'view']);
+$acl->addSubject('session', ['login', 'logout']);
+
+$acl->allow('manager', 'admin', 'users');
+$acl->allow('manager', 'reports', ['list', 'add']);
+$acl->allow('*', 'session', '*');
+$acl->allow('*', '*', 'view');
+
+$acl->deny('guest', '*', 'view');
+
+// ....
+
+
+// true - defined explicitly
+$acl->isAllowed('manager', 'admin', 'dashboard');
+
+// true - defiled with wildcard
+$acl->isAllowed('manager', 'session', 'login');
+
+// true - defined with wildcard
+$acl->isAllowed('accounting', 'reports', 'view');
+
+// false - defined explicitly
+$acl->isAllowed('guest', 'reports', 'view');
+
+// false - default access level
+$acl->isAllowed('guest', 'reports', 'add');
 ```
 
 <a name='function-based-access'></a>
 ## Function based access
-Also you can add as 4th parameter your custom function which must return boolean value. It will be called when you use `isAllowed()` method. You can pass parameters as associative array to `isAllowed()` method as 4th argument where key is parameter name in our defined function.
+Depending on the needs of your application, you might need another layer of calculations to allow or deny access to users through the ACL. The method `isAllowed()` accepts a 4th parameter which is a callable such as an anonymous function.
+
+To take advantage of this functionality, you will need to define your function when calling the `allow()` method for the operation and subject you need. Assume that we need to allow access to all `manager` operations to the `admin` subject except if their name is 'Bob' (Poor Bob!). To achieve this we will register an anonymous function that will check this condition.
 
 ```php
 <?php
-// Set access level for role into resources with custom function
+
+use Phalcon\Acl;
+use Phalcon\Acl\Adapter\Memory as AclList;
+use Phalcon\Acl\Operation;
+use Phalcon\Acl\Subject;
+
+$acl = new AclList();
+
+/**
+ * Setup the ACL
+ */
+$acl->addOperation('manager');                   
+$acl->addSubject('admin', ['dashboard', 'users', 'view']);
+
+// Set access level for operation into subjects with custom function
 $acl->allow(
-    'Guests',
-    'Customers',
-    'search',
-    function ($a) {
-        return $a % 2 === 0;
+    'manager',
+    'admin',
+    'dashboard',
+    function ($name) {
+        return boolval('Bob' !== $name);
+    }
+);
+```
+
+Now that the callable is defined in the ACL, we will need to call the `isAllowed()` method with an array as the fourth parameter:
+
+```php
+<?php
+
+use Phalcon\Acl;
+use Phalcon\Acl\Adapter\Memory as AclList;
+use Phalcon\Acl\Operation;
+use Phalcon\Acl\Subject;
+
+$acl = new AclList();
+
+/**
+ * Setup the ACL
+ */
+$acl->addOperation('manager');                   
+$acl->addSubject('admin', ['dashboard', 'users', 'view']);
+
+// Set access level for operation into subjects with custom function
+$acl->allow(
+    'manager',
+    'admin',
+    'dashboard',
+    function ($name) {
+        return boolval('Bob' !== $name);
     }
 );
 
-// Check whether role has access to the operation with custom function
-
 // Returns true
 $acl->isAllowed(
-    'Guests',
-    'Customers',
-    'search',
+    'manager',
+    'admin',
+    'dashboard',
     [
-        'a' => 4,
+        'name' => 'John',
     ]
 );
 
 // Returns false
 $acl->isAllowed(
-    'Guests',
-    'Customers',
-    'search',
+    'manager',
+    'admin',
+    'dashboard',
     [
-        'a' => 3,
+        'name' => 'Bob',
     ]
 );
 ```
 
-Also if you don't provide any parameters in `isAllowed()` method then default behaviour will be `Acl::ALLOW`. You can change it by using method `setNoArgumentsDefaultAction()`.
+> The fourth parameter must be an array. Each array element represents a parameter that your anonymous function accepts. The key of the element is the name of the parameter, while the value is what will be passed as the value of that the parameter of to the function.
+{:.alert .alert-info}
+
+You can also omit to pass the fourth parameter to `isAllowed()` if you wish. The default action for a call to `isAllowed()` without the last parameter is `Acl::DENY`. To change this behavior, you can make a call to `setNoArgumentsDefaultAction()`: 
 
 ```php
-use Phalcon\Acl;
-
 <?php
-// Set access level for role into resources with custom function
+
+use Phalcon\Acl;
+use Phalcon\Acl\Adapter\Memory as AclList;
+use Phalcon\Acl\Operation;
+use Phalcon\Acl\Subject;
+
+$acl = new AclList();
+
+/**
+ * Setup the ACL
+ */
+$acl->addOperation('manager');                   
+$acl->addSubject('admin', ['dashboard', 'users', 'view']);
+
+// Set access level for operation into subjects with custom function
 $acl->allow(
-    'Guests',
-    'Customers',
-    'search',
-    function ($a) {
-        return $a % 2 === 0;
+    'manager',
+    'admin',
+    'dashboard',
+    function ($name) {
+        return boolval('Bob' !== $name);
     }
 );
 
-// Check whether role has access to the operation with custom function
+// Returns false
+$acl->isAllowed('manager', 'admin', 'dashboard');
+
+$acl->setNoArgumentsDefaultAction(Acl::ALLOW);
 
 // Returns true
-$acl->isAllowed(
-    'Guests',
-    'Customers',
-    'search'
-);
-
-// Change no arguments default action
-$acl->setNoArgumentsDefaultAction(
-    Acl::DENY
-);
-
-// Returns false
-$acl->isAllowed(
-    'Guests',
-    'Customers',
-    'search'
-);
+$acl->isAllowed('manager', 'admin', 'dashboard');
 ```
 
 <a name='objects'></a>
-## Objects as role name and resource name
-You can pass objects as `roleName` and `resourceName`. Your classes must implement `Phalcon\Acl\RoleAware` for `roleName` and `Phalcon\Acl\ResourceAware` for `resourceName`.
+## Objects as operation name and subject name
+Phalcon allows developers to define their own operation and subject objects. These objects must implement the supplied interfaces:
 
-Our `UserRole` class
+* [Phalcon\Acl\OperationAware](api/Phalcon_Acl_OperationAware) for Operation
+* [Phalcon\Acl\SubjectAware](api/Phalcon_Acl_SubjectAware) for Subject
+
+### Operation
+We can implement the [Phalcon\Acl\OperationAware](api/Phalcon_Acl_OperationAware) in our custom class with its own logic. The example below shows a new operation object called `ManagerOperation`: 
 
 ```php
 <?php
 
-use Phalcon\Acl\RoleAware;
+use Phalcon\Acl\OperationAware;
 
-// Create our class which will be used as roleName
-class UserRole implements RoleAware
+// Create our class which will be used as operationName
+class ManagerOperation implements OperationAware
 {
     protected $id;
 
-    protected $roleName;
+    protected $operationName;
 
-    public function __construct($id, $roleName)
+    public function __construct($id, $operationName)
     {
         $this->id       = $id;
-        $this->roleName = $roleName;
+        $this->operationName = $operationName;
     }
 
     public function getId()
@@ -240,35 +441,36 @@ class UserRole implements RoleAware
         return $this->id;
     }
 
-    // Implemented function from RoleAware Interface
-    public function getRoleName()
+    // Implemented function from OperationAware Interface
+    public function getOperationName()
     {
-        return $this->roleName;
+        return $this->operationName;
     }
 }
 ```
 
-And our `ModelResource` class
+### Subject
+We can implement the [Phalcon\Acl\SubjectAware](api/Phalcon_Acl_SubjectAware) in our custom class with its own logic. The example below shows a new operation object called `ReportsSubject`: 
 
 ```php
 <?php
 
-use Phalcon\Acl\ResourceAware;
+use Phalcon\Acl\SubjectAware;
 
-// Create our class which will be used as resourceName
-class ModelResource implements ResourceAware
+// Create our class which will be used as subjectName
+class ReportsSubject implements SubjectAware
 {
     protected $id;
 
-    protected $resourceName;
+    protected $subjectName;
 
     protected $userId;
 
-    public function __construct($id, $resourceName, $userId)
+    public function __construct($id, $subjectName, $userId)
     {
-        $this->id           = $id;
-        $this->resourceName = $resourceName;
-        $this->userId       = $userId;
+        $this->id          = $id;
+        $this->subjectName = $subjectName;
+        $this->userId      = $userId;
     }
 
     public function getId()
@@ -281,230 +483,196 @@ class ModelResource implements ResourceAware
         return $this->userId;
     }
 
-    // Implemented function from ResourceAware Interface
-    public function getResourceName()
+    // Implemented function from SubjectAware Interface
+    public function getSubjectName()
     {
-        return $this->resourceName;
+        return $this->subjectName;
     }
 }
 ```
 
-Then you can use them in `isAllowed()` method.
+### ACL
+These objects can now be used in our ACL. 
 
 ```php
 <?php
 
-use UserRole;
-use ModelResource;
+use ManagerOperation;
+use Phalcon\Acl;
+use Phalcon\Acl\Adapter\Memory as AclList;
+use Phalcon\Acl\Operation;
+use Phalcon\Acl\Subject;
+use ReportsSubject;
 
-// Set access level for role into resources
-$acl->allow('Guests', 'Customers', 'search');
-$acl->allow('Guests', 'Customers', 'create');
-$acl->deny('Guests', 'Customers', 'update');
+$acl = new AclList();
 
-// Create our objects providing roleName and resourceName
+/**
+ * Add the operations
+ */
+$acl->addOperation('manager');
 
-$customer = new ModelResource(
-    1,
-    'Customers',
-    2
-);
+/**
+ * Add the Subjects
+ */
+$acl->addSubject('reports', ['list', 'add', 'view']);
 
-$designer = new UserRole(
-    1,
-    'Designers'
-);
-
-$guest = new UserRole(
-    2,
-    'Guests'
-);
-
-$anotherGuest = new UserRole(
-    3,
-    'Guests'
-);
-
-// Check whether our user objects have access to the operation on model object
-
-// Returns false
-$acl->isAllowed(
-    $designer,
-    $customer,
-    'search'
-);
-
-// Returns true
-$acl->isAllowed(
-    $guest,
-    $customer,
-    'search'
-);
-
-// Returns true
-$acl->isAllowed(
-    $anotherGuest,
-    $customer,
-    'search'
-);
-```
-
-Also you can access those objects in your custom function in `allow()` or `deny()`. They are automatically bind to parameters by type in function.
-
-```php
-<?php
-
-use UserRole;
-use ModelResource;
-
-// Set access level for role into resources with custom function
+/**
+ * Now tie them all together with a custom function. The ManagerOperation and
+ * ModelSbject parameters are necessary for the custom function to work 
+ */
 $acl->allow(
-    'Guests',
-    'Customers',
-    'search',
-    function (UserRole $user, ModelResource $model) { // User and Model classes are necessary
-        return $user->getId == $model->getUserId();
+    'manager', 
+    'reports', 
+    'list',
+    function (ManagerOperation $manager, ModelSubject $model) {
+        return $manager->getId() === $model->getUserId();
     }
 );
 
-$acl->allow(
-    'Guests',
-    'Customers',
-    'create'
-);
+// Create the custom objects
+$levelOne = new ManagerOperation(1, 'manager-1');
+$levelTwo = new ManagerOperation(2, 'manager');
+$admin    = new ManagerOperation(3, 'manager');
 
-$acl->deny(
-    'Guests',
-    'Customers',
-    'update'
-);
+// id - name - userId
+$reports  = new ModelSubject(2, 'reports', 2);
 
-// Create our objects providing roleName and resourceName
-
-$customer = new ModelResource(
-    1,
-    'Customers',
-    2
-);
-
-$designer = new UserRole(
-    1,
-    'Designers'
-);
-
-$guest = new UserRole(
-    2,
-    'Guests'
-);
-
-$anotherGuest = new UserRole(
-    3,
-    'Guests'
-);
-
-// Check whether our user objects have access to the operation on model object
-
+// Check whether our user objects have access 
 // Returns false
-$acl->isAllowed(
-    $designer,
-    $customer,
-    'search'
-);
+$acl->isAllowed($levelOne, $reports, 'list');
 
 // Returns true
-$acl->isAllowed(
-    $guest,
-    $customer,
-    'search'
-);
+$acl->isAllowed($levelTwo, $reports, 'list');
 
 // Returns false
-$acl->isAllowed(
-    $anotherGuest,
-    $customer,
-    'search'
-);
-```
+$acl->isAllowed($admin, $reports, 'list');
+````
 
-You can still add any custom parameters to function and pass associative array in `isAllowed()` method. Also order doesn't matter.
+The second call for `$levelTwo` evaluates `true` since the `getUserId()` returns `2` which in turn is evaluated in our custom function. Also note that in the custom function for `allow()` the objects are automatically bound, providing all the data necessary for the custom function to work. The custom function can accept any number of additional parameters. The order of the parameters defined in the `function()` constructor does not matter, because the objects will be automatically discovered and bound.
 
-<a name='roles-inheritance'></a>
-## Roles Inheritance
-You can build complex role structures using the inheritance that `Phalcon\Acl\Role` provides. Roles can inherit from other roles, thus allowing access to supersets or subsets of resources. To use role inheritance, you need to pass the inherited role as the second parameter of the method call, when adding that role in the list.
+<a name='operations-inheritance'></a>
+## Operations Inheritance
+To remove duplication and increase efficiency in your application, the ACL offers inheritance in operations. This means that you can define one [Phalcon\Acl\Operation](api/Phalcon_Acl_Operation) as a base and after that inherit from it offering access to supersets or subsets of subjects. To use operation inheritance, you need, you need to pass the inherited operation as the second parameter of the method call, when adding that operation in the list.
 
 ```php
 <?php
 
-use Phalcon\Acl\Role;
+use Phalcon\Acl;
+use Phalcon\Acl\Adapter\Memory as AclList;
+use Phalcon\Acl\Operation;
 
-// ...
+$acl = new AclList();
 
-// Create some roles
+/**
+ * Create the operations
+ */
+$manager    = new Operation('Managers');
+$accounting = new Operation('Accounting Department');
+$guest      = new Operation('Guests');
 
-$roleAdmins = new Role('Administrators', 'Super-User role');
+/**
+ * Add the `guest` operation to the ACL 
+ */
+$acl->addOperation($guest);
 
-$roleGuests = new Role('Guests');
+/**
+ * Add the `accounting` inheriting from `guest` 
+ */
+$acl->addOperation($accounting, $guest);
+/**
+ * Add the `manager` inheriting from `accounting` 
+ */
 
-// Add 'Guests' role to ACL
-$acl->addRole($roleGuests);
+$acl->addOperation($manager, $accounting);
+```
 
-// Add 'Administrators' role inheriting from 'Guests' its accesses
-$acl->addRole($roleAdmins, $roleGuests);
+Whatever access `guests` have will be propagated to `accounting` and in turn `accounting` will be propagated to `manager`
+
+### Setup relationships after adding operations
+Based on the application design, you might prefer to add first all the operations and then define the relationship between them.
+
+```php
+<?php
+
+use Phalcon\Acl;
+use Phalcon\Acl\Adapter\Memory as AclList;
+use Phalcon\Acl\Operation;
+
+$acl = new AclList();
+
+/**
+ * Create the operations
+ */
+$manager    = new Operation('Managers');
+$accounting = new Operation('Accounting Department');
+$guest      = new Operation('Guests');
+
+/**
+ * Add all the operations
+ */
+$acl->addOperation($manager);
+$acl->addOperation($accounting);
+$acl->addOperation($guest);
+
+/**
+ * Add the inheritance 
+ */
+$acl->addInherit($manager, $accounting);
+$acl->addInherit($accounting, $guest);
+
 ```
 
 <a name='serialization'></a>
 ## Serializing ACL lists
-To improve performance `Phalcon\Acl` instances can be serialized and stored in APC, session, text files or a database table so that they can be loaded at will without having to redefine the whole list. You can do that as follows:
+[Phalcon\Acl](api/Phalcon_Acl) can be serialized and stored in a cache system to improve efficiency. You can store the serialized object in APC, session, file system, database, Redis etc. This way you can retrieve the ACL quickly without having to read the underlying data that create the ACL nor will you have to compute the ACL in every request.
 
 ```php
 <?php
 
+use Phalcon\Acl;
 use Phalcon\Acl\Adapter\Memory as AclList;
 
-// ...
-
+$aclFile = 'app/security/acl.cache';
 // Check whether ACL data already exist
-if (!is_file('app/security/acl.data')) {
+if (true !== is_file($aclFile)) {
+    
+    // The ACL does not exist - build it
     $acl = new AclList();
 
-    // ... Define roles, resources, access, etc
+    // ... Define operations, subjects, access, etc
 
     // Store serialized list into plain file
-    file_put_contents(
-        'app/security/acl.data',
-        serialize($acl)
-    );
+    file_put_contents($aclFile, serialize($acl));
 } else {
     // Restore ACL object from serialized file
-    $acl = unserialize(
-        file_get_contents('app/security/acl.data')
-    );
+    $acl = unserialize(file_get_contents($aclFile));
 }
 
 // Use ACL list as needed
-if ($acl->isAllowed('Guests', 'Customers', 'edit')) {
+if (true === $acl->isAllowed('manager', 'admin', 'dashboard');) {
     echo 'Access granted!';
 } else {
     echo 'Access denied :(';
 }
 ```
 
-It's recommended to use the Memory adapter during development and use one of the other adapters in production.
+It is a good practice to not use serialization of the ACL during development, to ensure that your ACL is built in every request, while other adapters or means of serializing and storing the ACL in production.
 
 <a name='events'></a>
 ## Events
-`Phalcon\Acl` is able to send events to an `EventsManager` if it's present. Events are triggered using the type 'acl'. Some events when returning boolean false could stop the active operation. The following events are supported:
+[Phalcon\Acl](api/Phalcon_Acl) can work in conjunction with the [EventsManager](events) if present, to fire events to your application. Events are triggered using the type `acl`. Events that return `false` can stop the active operation. The following events are available:
 
-| Event Name        | Triggered                                               | Can stop operation? |
-|-------------------|---------------------------------------------------------|:-------------------:|
-| beforeCheckAccess | Triggered before checking if a role/resource has access | Yes                 |
-| afterCheckAccess  | Triggered after checking if a role/resource has access  | No                  |
+| Event Name          | Triggered                                                   | Can stop operation? |
+|---------------------|-------------------------------------------------------------|:-------------------:|
+| `afterCheckAccess`  | Triggered after checking if a operation/subject has access  | No                  |
+| `beforeCheckAccess` | Triggered before checking if a operation/subject has access | Yes                 |
 
-The following example demonstrates how to attach listeners to this component:
+The following example demonstrates how to attach listeners to the ACL:
 
 ```php
 <?php
 
+use Phalcon\Acl;
 use Phalcon\Acl\Adapter\Memory as AclList;
 use Phalcon\Events\Event;
 use Phalcon\Events\Manager as EventsManager;
@@ -518,11 +686,11 @@ $eventsManager = new EventsManager();
 $eventsManager->attach(
     'acl:beforeCheckAccess',
     function (Event $event, $acl) {
-        echo $acl->getActiveRole();
+        echo $acl->getActiveOperation() . PHP_EOL;
 
-        echo $acl->getActiveResource();
+        echo $acl->getActiveSubject() . PHP_EOL;
 
-        echo $acl->getActiveAccess();
+        echo $acl->getActiveAccess() . PHP_EOL;
     }
 );
 
@@ -537,6 +705,4 @@ $acl->setEventsManager($eventsManager);
 
 <a name='custom-adapters'></a>
 ## Implementing your own adapters
-The `Phalcon\Acl\AdapterInterface` interface must be implemented in order to create your own ACL adapters or extend the existing ones.
-
-
+The [Phalcon\Acl\AdapterInterface](api/Phalcon_Acl_AdapterInterface) interface must be implemented in order to create your own ACL adapters or extend the existing ones.

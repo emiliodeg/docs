@@ -1,6 +1,12 @@
-# Abstract class **Phalcon\\Text**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Text'
+---
+# Abstract class **Phalcon\Text**
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/text.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/text.zep)
 
 Provides utilities to work with texts
 
@@ -142,7 +148,7 @@ Reduces multiple slashes in a string to single slashes
 <?php
 
 echo Phalcon\Text::reduceSlashes("foo//bar/baz"); // foo/bar/baz
-echo Phalcon\Text::reduceSlashes("http://foo.bar///baz/buz"); // http://foo.bar/baz/buz
+echo Phalcon\Text::reduceSlashes("https://foo.bar///baz/buz"); // https://foo.bar/baz/buz
 
 ```
 

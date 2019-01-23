@@ -1,19 +1,10 @@
-<div class='article-menu' markdown='1'>
-
-- [Increasing Performance](#overview)
-    - [Profile on the Server](#profiling-server)
-        - [Profiling with Xhprof](#profiling-server-xhprof)
-        - [Profiling SQL Statements](#profiling-server-sql-statements)
-    - [Profile on the Client](#profiling-client)
-        - [Profile with Chrome/Firefox](#profiling-client-chrome-firefox)
-        - [Yahoo! YSlow](#profiling-client-yslow)
-        - [Profile with Speed Tracer](#profiling-client-speed-tracer)
-    - [Use a recent PHP version](#php-version)
-    - [Use a PHP Bytecode Cache](#bytecode-cache)
-    - [Do blocking work in the background](#background-tasks)
-    - [Google Page Speed](#page-speed)
-
-</div>
+---
+layout: article
+language: 'en'
+version: '4.0'
+---
+##### This article reflects v3.4 and has not yet been revised
+{:.alert .alert-danger}
 
 <a name='overview'></a>
 # Increasing Performance
@@ -25,7 +16,7 @@ Each application is different, the permanent profiling is important to understan
 
 Profiling with XDebug
 
-[XDebug](http://xdebug.org/docs) provides an easier way to profile PHP applications, just install the extension and enable profiling in the php.ini:
+[XDebug](https://xdebug.org/docs) provides an easier way to profile PHP applications, just install the extension and enable profiling in the php.ini:
 
 ```ini
 xdebug.profiler_enable = On
@@ -33,7 +24,7 @@ xdebug.profiler_enable = On
 
 Using a tool like [Webgrind](https://github.com/jokkedk/webgrind/) you can see which functions/methods are slower than others:
 
-![](/images/content/performance-webgrind.jpg)
+![](/assets/images/content/performance-webgrind.jpg)
 
 <a name='profiling-server-xhprof'></a>
 ### Profiling with Xhprof
@@ -59,14 +50,14 @@ include_once $XHPROF_ROOT . '/xhprof_lib/utils/xhprof_runs.php';
 $xhprof_runs = new XHProfRuns_Default();
 $run_id = $xhprof_runs->save_run($xhprof_data, 'xhprof_testing');
 
-echo "http://localhost/xhprof/xhprof_html/index.php?run={$run_id}&source=xhprof_testing\n";
+echo "https://localhost/xhprof/xhprof_html/index.php?run={$run_id}&source=xhprof_testing\n";
 ```
 
 Xhprof provides a built-in HTML viewer to analyze the profiled data:
 
-![](/images/content/performance-xhprof-2.jpg)
+![](/assets/images/content/performance-xhprof-2.jpg)
 
-![](/images/content/performance-xhprof-1.jpg)
+![](/assets/images/content/performance-xhprof-1.jpg)
 
 <a name='profiling-server-sql-statements'></a>
 ### Profiling SQL Statements
@@ -86,23 +77,23 @@ The following tools are useful to detect common bottlenecks in the client side:
 ### Profile with Chrome/Firefox
 Most modern browsers have tools to profile the page loading time. In Chrome you can use the web inspector to know how much time is taking the loading of the different resources required by a single page:
 
-![](/images/content/performance-chrome-1.jpg)
+![](/assets/images/content/performance-chrome-1.jpg)
 
-[Firebug](http://getfirebug.com/) provides a similar functionality:
+[Firebug](https://getfirebug.com/) provides a similar functionality:
 
-![](/images/content/performance-firefox-1.jpg)
+![](/assets/images/content/performance-firefox-1.jpg)
 
 <a name='profiling-client-yslow'></a>
 ### Yahoo! YSlow
-[YSlow](http://developer.yahoo.com/yslow/) analyzes web pages and suggests ways to improve their performance based on a set of [rules for high performance web pages](http://developer.yahoo.com/performance/rules.html)
+[YSlow](https://developer.yahoo.com/yslow/) analyzes web pages and suggests ways to improve their performance based on a set of [rules for high performance web pages](https://developer.yahoo.com/performance/rules.html)
 
-![](/images/content/performance-yslow-1.jpg)
+![](/assets/images/content/performance-yslow-1.jpg)
 
 <a name='profiling-client-speed-tracer'></a>
 ### Profile with Speed Tracer
 [Speed Tracer](https://developers.google.com/web-toolkit/speedtracer/) is a tool to help you identify and fix performance problems in your web applications. It visualizes metrics that are taken from low level instrumentation points inside of the browser and analyzes them as your application runs. Speed Tracer is available as a Chrome extension and works on all platforms where extensions are currently supported (Windows and Linux).
 
-![](/images/content/performance-speed-tracer.jpg)
+![](/assets/images/content/performance-speed-tracer.jpg)
 
 This tool is very useful because it help you to get the real time used to render the whole page including HTML parsing,
 Javascript evaluation and CSS styling.
@@ -113,7 +104,7 @@ PHP is faster every day, using the latest version improves the performance of yo
 
 <a name='bytecode-cache'></a>
 ## Use a PHP Bytecode Cache
-[APC](http://php.net/manual/en/book.apc.php) as many other bytecode caches help an application to reduce the overhead of read, tokenize and parse PHP files in each request. Once the extension is installed use the following setting to enable APC:
+[APC](https://php.net/manual/en/book.apc.php) as many other bytecode caches help an application to reduce the overhead of read, tokenize and parse PHP files in each request. Once the extension is installed use the following setting to enable APC:
 
 ```ini
 apc.enabled = On
@@ -123,12 +114,12 @@ apc.enabled = On
 ## Do blocking work in the background
 Process a video, send e-mails, compress a file or an image, etc., are slow tasks that must be processed in background jobs. There are a variety of tools that provide queuing or messaging systems that work well with PHP:
 
-* [Beanstalkd](http://kr.github.io/beanstalkd/)
-* [Redis](http://redis.io/)
-* [RabbitMQ](http://www.rabbitmq.com/)
+* [Beanstalkd](https://kr.github.io/beanstalkd/)
+* [Redis](https://redis.io/)
+* [RabbitMQ](https://www.rabbitmq.com/)
 * [Resque](https://github.com/chrisboulton/php-resque>)
-* [Gearman](http://gearman.org/)
-* [ZeroMQ](http://www.zeromq.org/)
+* [Gearman](https://gearman.org/)
+* [ZeroMQ](https://www.zeromq.org/)
 
 <a name='page-speed'></a>
 ## Google Page Speed

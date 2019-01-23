@@ -1,8 +1,14 @@
-# Class **Phalcon\\Http\\Request**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Http\Request'
+---
+# Class **Phalcon\Http\Request**
 
-*implements* [Phalcon\Http\RequestInterface](/en/3.2/api/Phalcon_Http_RequestInterface), [Phalcon\Di\InjectionAwareInterface](/en/3.2/api/Phalcon_Di_InjectionAwareInterface)
+*implements* [Phalcon\Http\RequestInterface](Phalcon_Http_RequestInterface), [Phalcon\Di\InjectionAwareInterface](Phalcon_Di_InjectionAwareInterface)
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/http/request.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/http/request.zep)
 
 Encapsulates request information for easy and secure access from application controllers.
 
@@ -38,7 +44,7 @@ public  **setHttpMethodParameterOverride** (*mixed* $httpMethodParameterOverride
 ...
 
 
-public  **setDI** ([Phalcon\DiInterface](/en/3.2/api/Phalcon_DiInterface) $dependencyInjector)
+public  **setDI** ([Phalcon\DiInterface](Phalcon_DiInterface) $dependencyInjector)
 
 Sets the dependency injector
 
@@ -404,7 +410,7 @@ Recursively counts file in an array of files
 
 public  **getUploadedFiles** ([*mixed* $onlySuccessful])
 
-Gets attached files as Phalcon\\Http\\Request\\File instances
+Gets attached files as Phalcon\Http\Request\File instances
 
 
 
@@ -436,7 +442,7 @@ echo $headers["Authorization"]; // Basic cGhhbGNvbjpzZWNyZXQ=
 
 public  **getHTTPReferer** ()
 
-Gets web page that refers active request. ie: http://www.google.com
+Gets web page that refers active request. ie: https://www.google.com
 
 
 

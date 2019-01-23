@@ -1,4 +1,10 @@
-# Interface **Phalcon\\Cli\\TaskInterface**
+---
+layout: article
+language: 'en'
+version: '4.0'
+title: 'Phalcon\Cli\TaskInterface'
+---
+# Interface **Phalcon\Cli\TaskInterface**
 
-<a href="https://github.com/phalcon/cphalcon/blob/master/phalcon/cli/taskinterface.zep" class="btn btn-default btn-sm">Source on GitHub</a>
+[Source on GitHub](https://github.com/phalcon/cphalcon/tree/v{{ page.version }}.0/phalcon/cli/taskinterface.zep)
 

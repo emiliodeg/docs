@@ -1,16 +1,14 @@
-<div class='article-menu' markdown='1'>
-
-- [Model Behaviors](#overview)
-    - [Timestampable](#timestampable)
-    - [SoftDelete](#softdelete)
-    - [Creating your own behaviors](#create-your-own-behaviors)
-    - [Using Traits as behaviors](#traits-as-behaviors)
-    
-</div>
+---
+layout: article
+language: 'en'
+version: '4.0'
+---
+##### This article reflects v3.4 and has not yet been revised
+{:.alert .alert-danger}
 
 <a name='overview'></a>
 # Model Behaviors
-Behaviors are shared conducts that several models may adopt in order to re-use code, the ORM provides an API to implement behaviors in your models. Also, you can use the events and callbacks as seen before as an alternative to implement Behaviors with more freedom.
+Behaviors are shared constructs that several models may adopt in order to re-use code. The ORM provides an API to implement behaviors in your models. Also, you can use the events and callbacks as seen before as an alternative to implement Behaviors with more freedom.
 
 A behavior must be added in the model initializer, a model can have zero or more behaviors:
 
@@ -76,7 +74,7 @@ public function initialize()
 ```
 
 Each event can have its own options, `field` is the name of the column that must be updated, if `format` is a string it will be used
-as format of the PHP's function [date](http://php.net/manual/en/function.date.php), format can also be an anonymous function providing you the free to generate any kind timestamp:
+as format of the PHP's function [date](https://php.net/manual/en/function.date.php), format can also be an anonymous function providing you the free to generate any kind timestamp:
 
 ```php
 <?php
@@ -106,7 +104,7 @@ public function initialize()
 }
 ```
 
-If the option `format` is omitted a timestamp using the PHP's function [time](http://php.net/manual/en/function.time.php), will be used.
+If the option `format` is omitted a timestamp using the PHP's function [time](https://php.net/manual/en/function.time.php), will be used.
 
 <a name='softdelete'></a>
 ## SoftDelete
@@ -179,7 +177,7 @@ Note that you need to specify the deleted condition in your queries to effective
 
 <a name='create-your-own-behaviors'></a>
 ## Creating your own behaviors
-The ORM provides an API to create your own behaviors. A behavior must be a class implementing the `Phalcon\Mvc\Model\BehaviorInterface`. Also, `Phalcon\Mvc\Model\Behavior` provides most of the methods needed to ease the implementation of behaviors.
+The ORM provides an API to create your own behaviors. A behavior must be a class implementing the [Phalcon\Mvc\Model\BehaviorInterface](api/Phalcon_Mvc_Model_BehaviorInterface). Also, [Phalcon\Mvc\Model\Behavior](api/Phalcon_Mvc_Model_Behavior) provides most of the methods needed to ease the implementation of behaviors.
 
 The following behavior is an example, it implements the Blameable behavior which helps identify the user that is performed operations over a model:
 
@@ -265,7 +263,7 @@ $title = $post->getSlug();
 
 <a name='traits-as-behaviors'></a>
 ## Using Traits as behaviors
-You can use [Traits](http://php.net/manual/en/language.oop5.traits.php) to re-use code in your classes, this is another way to implement custom behaviors. The following trait implements a simple version of the Timestampable behavior:
+You can use [Traits](https://php.net/manual/en/language.oop5.traits.php) to re-use code in your classes, this is another way to implement custom behaviors. The following trait implements a simple version of the Timestampable behavior:
 
 ```php
 <?php
